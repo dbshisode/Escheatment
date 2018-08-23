@@ -1,0 +1,20 @@
+/*******************************************************************************
+ http://www.jankoatwarpspeed.com/reinventing-a-drop-down-with-css-and-jquery/
+*******************************************************************************/
+
+/* dropdown */
+dl.dropdown {margin: 0; padding: 0}
+.dropdown dd, .dropdown dt, .dropdown ul { margin:0px; padding:0px; }
+.dropdown dd { position:relative; }
+.dropdown a, .dropdown a:visited { font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000; font-weight:normal; text-decoration:none; outline:none;}
+.dropdown a:hover { color:#fff;}
+.dropdown dt a:hover, .dropdown dt a:focus { color:#000; border: 1px solid #99A3B1;}
+.dropdown dt a {background:#F7F7F7 url(images/dt-bkg.png) no-repeat right center; display:block; padding-right:20px; border:1px solid #99A3B1; width:150px;}
+.dropdown dt a span { cursor:pointer; display:block; padding:4px 5px;}
+.dropdown dd ul { z-index: 1010; background:#fff none; border:1px solid #bbb; color:#333; display:none; left:0px; padding:5px 0px; position:absolute; top:2px; width:auto; min-width:170px; list-style:none;}
+.dropdown span.value { display:none;}
+.dropdown dd ul li a { padding:6px 5px; display:block;}
+.dropdown dd ul li a:hover { background-color:#4b6a91; /*336ECD*/}
+
+.dropdown img { border:none; vertical-align:middle; margin-left:0; margin-right:5px; padding:0; }
+/*.flagvisibility { display:none;}*/

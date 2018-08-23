@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE tiles-definitions PUBLIC  
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	
+	<definition name="baseDefinition" template="/WEB-INF/views/template/base_template.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
+		<put-attribute name="datatables" value="/WEB-INF/views/includes/datatables.jsp" />
+		<put-attribute name="datatablesinit" value="/WEB-INF/views/includes/wqtable-init.jsp" />
+		<put-attribute name="nav" value="/WEB-INF/views/includes/nav-ops.jsp" />
+		<put-attribute name="bodytag" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+	</definition>
+	
+	<definition name="index" extends="baseDefinition">
+		<put-attribute name="title" value="Escheatment Application Login" />
+		<put-attribute name="datatables" value="" />
+		<put-attribute name="datatablesinit" value="" />		
+		<put-attribute name="nav" value="/WEB-INF/views/includes/nav-home.jsp" />
+		<put-attribute name="bodytag" value="/WEB-INF/views/includes/body-tag.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/login-body.jsp" />		
+		<put-attribute name="footer" value="" />
+	</definition>	
+	
+	<definition name="review-ops" extends="baseDefinition">
+		<put-attribute name="title" value="Escheatment Application - Operations Review" />
+		<put-attribute name="bodytag" value="/WEB-INF/views/includes/review-ops-body-tag.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/review-ops-body.jsp" />
+
+	</definition>
+	
+	<definition name="active-ops" extends="baseDefinition">
+		<put-attribute name="title" value="Escheatment Application - Marked as Active" />
+		<put-attribute name="bodytag" value="/WEB-INF/views/includes/active-ops-body-tag.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/active-ops-body.jsp" />
+	</definition>	
+	
+	<definition name="genericerror" extends="baseDefinition">
+		<put-attribute name="title" value="Escheatment Application - Error" />
+		<put-attribute name="bodytag" value="/WEB-INF/views/includes/review-ops-body-tag.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/review-ops-body.jsp" />
+		<put-attribute name="datatables" value="" />
+		<put-attribute name="datatablesinit" value="" />	
+
+	</definition>
+		
+</tiles-definitions>

@@ -1,0 +1,92 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- <mvc:resources mapping="/assets/**" location="/assets/" /> <mvc:resources 
+		mapping="/css/**" location="/css/" /> <mvc:resources mapping="/js/**" location="/js/" 
+		/> <mvc:resources mapping="/bootstrap/**" location="/bootstrap/" /> -->
+
+	<mvc:resources mapping="/resources/**"
+		location="/resources/" />
+	<mvc:annotation-driven />
+
+	<context:component-scan
+		base-package="org.occourts" />
+
+	<!-- /WEB-INF/views/ folder holds views/jsp files -->
+	<!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<property name="prefix"> <value>/WEB-INF/views/</value> </property> <property 
+		name="suffix"> <value>.jsp</value> </property> </bean> -->
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/layouts/layouts.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean id="AuthenticationInterceptor"
+				class="org.occourts.escheatment.interceptor.AuthenticationInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- This is for messages that we want to show for validators -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/messages</value>
+				<!--<value>/WEB-INF/resources/auth</value> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- This is Datasource setting -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@v3dbdev1:1521:V3TRAIN" />
+		<property name="username" value="escheatment_user" />
+		<property name="password" value="E$ch@tm3n71" />
+	</bean>
+
+	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="java:comp/env/jdbc/EscheatmentDS"/> </bean> -->
+
+	<!-- jdbc template bean -->
+	<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<bean id="escheatmentuserdao"
+		class="org.occourts.escheatment.dao.impl.EscheatmentUserDAOImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+
+	<bean id="wqdatadao"
+		class="org.occourts.escheatment.dao.impl.WorkQueueDataDAOImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+
+	<bean id="workqueuedatabo"
+		class="org.occourts.escheatment.bo.WorkQueueDataBO">
+	</bean>
+
+</beans>

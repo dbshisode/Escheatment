@@ -1,0 +1,499 @@
+#calendar-main {
+  min-width:600px;
+  /*border: 1px solid #ccc;*/
+  border: 1px solid #c8cddb;
+  border-bottom: 0;
+}
+.datatable {
+  width: 100%;
+  min-width:600px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /*border: 1px solid #ccc;*/
+  border-collapse: collapse;
+}
+.dialog-wrapper .datatable {
+  width: 99%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #c8cddb;
+  border-bottom: 0;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.datatable th {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  /*color: #000;*/
+  color: #254062;
+  font-weight: bold;
+  text-align: left;
+  vertical-align: top;
+  padding: 7px 3px;
+  border: 0;
+  border-bottom: 1px solid #c8cddb;
+  /* background: #e9edf1 url(images/datatable-header-bkg.gif) repeat-x 0 50% ; */
+  background: #e9edf1 url(images/pane-header-bkg.png) repeat-x 0 50%;
+}
+.datatable td {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #444;
+  padding: 8px 3px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #ddd;
+}
+.dialog-wrapper .datatable td {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #444;
+  padding: 7px 5px;
+  text-align: left;
+  vertical-align: top;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+/*  my calendar view */
+.datatable .calendar-spacer {
+  width:5%;
+}
+.datatable .calendar-time {
+  width:8%;
+}
+.datatable .calendar-num {
+  width:7%;
+}
+.datatable .calendar-title {
+  width:22%;
+}
+.datatable .calendar-type {
+  width:21%;
+}
+.datatable .calendar-doc-counter {
+  width:7%;
+  text-align:center;
+}
+.datatable .calendar-progress {
+  width:10%;
+}
+.datatable .calendar-status {
+  width:10%;
+}
+.datatable .calendar-dept {
+  width:10%;
+}
+.datatable .calendar-upload-workup {
+  width:12%;
+  text-align:center;
+}
+
+/* proposed orders view */
+.datatable .po-casenum {
+  width:20%;
+}
+.datatable .po-casetitle {
+  width:30%;
+}
+.datatable .po-eventdate {
+  width:15%;
+}
+.datatable .po-eventype {
+  width:20%;
+}
+.datatable .po-transaction {
+  width:15%;
+}
+
+/*  dialog */
+.datatable .dialog-name {
+  width:34%;
+}
+.datatable .dialog-type {
+  width:19%;
+}
+.datatable .dialog-address {
+  width:35%;
+}
+.datatable .dialog-date {
+  width:12%;
+}
+
+tr.selected {
+  /* background-color:#e1e8f8; */
+  background-color:#fde9a2;
+  color:#333;
+}
+
+tr.highlighted {
+    background-color:#E6F7C0;
+    /* background-color:#fde9a2; */
+}
+
+.case-header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-align: left;
+  vertical-align:middle;
+  padding: 6px 3px;
+  border-top: 2px solid #4265A3 !important; /* #9C0C08 */
+  border-bottom: 1px solid #c8cddb;
+  background: #EEF0F3 !important;
+}
+
+.case-header-highlighted {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-align: left;
+  vertical-align:middle;
+  padding: 6px 3px;
+  border-top: 2px solid #4265A3 !important; /* #9C0C08 */
+  border-bottom: 1px solid #c8cddb;
+  background: #FEF5DA !important; /*E6F7C0*/
+}
+
+th.case-header-separator {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight:bold;
+  padding: 6px 3px;
+  border-top:3px solid #840000;
+  background: #E8EBEE !important;
+  vertical-align:middle;
+}
+th.case-header-separator-level2 {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight:bold;
+  padding: 6px 3px;
+  border-top:4px solid #577801;
+  /* border-top:4px solid #136464; */
+  /* border-top:4px solid #819B3D; */
+  background: #E8EBEE !important;
+  vertical-align:middle;
+}
+th.case-header-separator-level3 {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight:bold;
+  padding: 6px 3px;
+  border-top:4px solid #840000;
+  background: #ECEFF2 !important;
+  vertical-align:middle;
+}
+
+td.hidden, th.hidden {
+    display:none;
+}
+
+a.casenum-link, a.casenum-link:link, a.casenum-link:visited, a.casenum-link:active {
+    display: block;
+    float: left;
+    width: 190px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000; /*283749*/
+    font-weight: normal;
+    text-align: left;
+    text-decoration:none;
+    padding: 2px 0;
+    padding-left:18px;
+    /*background: url(images/icon-red-link.png) no-repeat 0 50%;*/
+    background: url(images/document-pdf.png) no-repeat 0 50%; /*document-pdf.png*/
+}
+a.casenum-link-prepped, a.casenum-link-prepped:link, a.casenum-link-prepped:visited, a.casenum-link-prepped:active {
+    display: block;
+    float: left;
+    width: 190px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000; /*283749*/
+    font-weight: normal;
+    text-align: left;
+    text-decoration:none;
+    padding-left:18px;
+    background: url(images/document-share.png) no-repeat 0 50%; /*document-share.png*/
+}
+a.casenum-link:hover, a.casenum-link-prepped:hover {
+  text-decoration: underline;
+}
+
+/* buttons on my calendar */
+.button-finalized-no {
+  cursor:default;
+  padding: 4px 11px;
+  background: url(images/finalized.png) no-repeat 48% 15%;
+}
+.button-finalized-yes {
+  cursor:default;
+  padding: 4px 11px;
+  background: url(images/finalized.png) no-repeat 48% 86%;
+}
+
+/*.button-future-events {
+  padding: 4px 12px;
+  background: url(images/future-events.png) no-repeat 49% 13%;
+}
+.button-future-events:hover {
+  padding: 4px 12px;
+  background: url(images/future-events.png) no-repeat 49% 83%;
+}*/
+.button-examination {
+  padding: 4px 12px;
+  background: url(images/examination.png) no-repeat 49% 13%;
+}
+.button-examination:hover {
+  padding: 4px 12px;
+  background: url(images/examination.png) no-repeat 49% 83%;
+}
+.button-locked {
+  padding: 4px 12px;
+  background: url(images/locked.png) no-repeat 49% 13%;
+}
+.button-locked:hover {
+  padding: 4px 12px;
+  background: url(images/locked.png) no-repeat 49% 83%;
+}
+.icon-ciss {
+    display: inline-block;
+    width: 16px;
+    background: url(images/ciss-button.png) no-repeat 50% 50%;
+}
+
+.icon-future-events {
+    display: inline-block;
+    width: 16px;
+    background: url(images/schedule-button.png) no-repeat 50% 50%;
+}
+.icon-examination {
+    display: inline-block;
+    width: 16px;
+    background: url(images/doc_icon.png) no-repeat 50% 50%;
+}
+
+/*
+.button-participants {
+  padding: 4px 12px;
+  background: url(images/participants.png) no-repeat 50% 13%;
+}
+.button-participants:hover {
+  padding: 4px 12px;
+  background: url(images/participants.png) no-repeat 50% 83%;
+}
+*/
+.icon-participants {
+    display: inline-block;
+    width: 16px;
+    background: url(images/icon-group.png) no-repeat 50% 50%;
+}
+
+
+.button-workup-present {
+  padding: 4px 9px;
+  background: url(images/button-workup.png) no-repeat 46% 86%;
+}
+.button-workup-not-present {
+  cursor: default;
+  padding: 4px 9px;
+  background: url(images/button-workup.png) no-repeat 46% 14%;
+}
+
+/* class to be applied in association with addRowHandlers function from RowHandlers.js script */
+.rowMouseOver {
+    background: #fde9a2 url(images/selected-row.jpg) repeat-x 0 0;
+    cursor: pointer;
+}
+
+span.pagebanner {
+  margin: 0;
+  background-color: #ebebeb;
+  padding: 4px 0px 4px 0px;
+  width: 100%;
+  margin-top: 5px;
+  display: block;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #333;
+  text-align: right;
+}
+
+/* empty data table */
+.datatable-empty {
+  width: 100%;
+  margin:0;
+  padding:0;
+  border:1px solid #bbb;
+  border-collapse: collapse;
+}
+.datatable-empty td {
+  padding: 30px 10px 320px 10px;
+  text-align: left;
+  vertical-align: top;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #666;
+  font-style: italic;
+}
+
+.dialog-wrapper {
+    /* background-color: #ededed;*/
+}
+
+#participants-dialog{ background-color: #fff; }
+
+#dialog-loading {
+    width: 64px;
+    height: 64px;
+    padding: 32px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+span.finalized {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin-top: 0px;
+    margin-left: 13px;
+    background: url(images/icon-address.png) no-repeat 50% 50%;
+}
+
+span.empty-workup {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+a.legal-workup-on {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    background: url(images/icon-workup-on.png) no-repeat 50% 50%;
+}
+
+a.legal-workup-off {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-decoration: none;
+    background: url(images/icon-workup-off.png) no-repeat 50% 50%;
+}
+
+.hearing-status-default {
+    display: block;
+    padding: 5px 5px;
+    text-decoration: none;
+}
+.hearing-status-red {
+    display: inline-block;
+    width: 8px;
+    height: 24px;
+    text-decoration: none;
+    background: url(images/icon-status-red.png) no-repeat 0 0;
+}
+.hearing-status-orange {
+    display: inline-block;
+    width: 8px;
+    height: 24px;
+    text-decoration: none;
+    background: url(images/icon-status-orange.png) no-repeat 0 0;
+}
+.hearing-status-green {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    display: block;
+    margin: 0;
+    padding: 5px 4px;
+    text-decoration: none;
+    background: url(images/icon-status-green.png) no-repeat 50% 50%;
+}
+
+.side-toolbar {
+    overflow: hidden;
+    margin:13px 5px 10px 0;
+    padding:4px 2px;
+    border:0;
+    /*border-top: 1px solid #C8CDDB;*/
+    /*border-bottom: 1px solid #C8CDDB;*/
+    background:#E4E6EA none !important;  /* #E1E4E9 #DEE1E6 #E4E6EA #EAECEF  */
+    /*background: #e9edf1 url(../themes/custom-theme/images/ui-bg_highlight-soft_90_e9edf1_1x100.png) 0 50% repeat-x;*/
+}
+
+.cal-filter-red {
+    display: inline-block;
+    width: 18px;
+    background: url(images/dd-item-red.png) no-repeat 50% 50%;
+}
+.cal-filter-blue {
+    display: inline-block;
+    width: 18px;
+    background: url(images/dd-item-blue.png) no-repeat 50% 50%;
+}
+.cal-filter-orange {
+    display: inline-block;
+    width: 18px;
+    background: url(images/dd-item-orange.png) no-repeat 50% 50%;
+}
+.cal-filter-green {
+    display: inline-block;
+    width: 18px;
+    background: url(images/dd-item-green.png) no-repeat 50% 50%;
+}
+
+.refresh-button {
+    display: inline-block;
+    width: 18px;
+    background: url(images/refresh-button.png) no-repeat 50% 50%;
+}
+.date-button {
+    padding: 0 0 0 22px;
+    background: url(images/icon_date_magnify.png) no-repeat 0 50%;
+}
+
+input#keyword {
+    font-family: Arial, Helvetica, sans-serif;
+    vertical-align: middle;
+    font-size: 13px;
+    color: #444;
+    /*font-weight: bold;*/
+    margin:0px;
+    padding: 3px 2px 4px 21px;
+    border: 1px solid #7F9DB9;
+    background:#fff url(images/find.png) no-repeat center left;
+}
+
+select#cal-time {
+    font-family: Arial, Helvetica, sans-serif;
+    vertical-align: middle;
+    font-size: 12px;
+    color: #444;
+    /*font-weight: bold;*/
+    margin:0px;
+    padding: 3px 1px 3px 2px;
+    border: 1px solid #7F9DB9;
+}
+
+span#find {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background:transparent url(images/search.png) no-repeat 50% 50%;
+}
+
+.ui-widget-header-custom{ background:#4b6a91 url(images/widget-header-custom.png) 0 50% repeat-x; color: #fff; font-weight: bold;}
+
+.ui-widget-overlay {
+    background: #333;
+    filter: alpha(opacity =50);
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+}

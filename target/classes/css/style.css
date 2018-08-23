@@ -1,0 +1,42 @@
+body {
+	background-color: wheat;
+}
+.error {
+	color: red;
+}
+.Row
+{
+    display: table;
+    //width: 100%; /*Optional*/
+    table-layout: fixed; /*Optional*/
+    border-spacing: 10px; /*Optional*/
+}
+.Column
+{
+    display: table-cell;
+    font-size: 24px;
+    vertical-align: middle;
+}
+
+.RowSmaller
+{
+    display: table;
+    //width: 100%; /*Optional*/
+    table-layout: fixed; /*Optional*/
+    border-spacing: 4px; /*Optional*/
+}
+.ColumnSmaller
+{
+    display: table-cell;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.login-box {
+    width:400px;
+    margin:0 auto;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color:#333;
+    background:url(box280-bkg-bottom.jpg) no-repeat bottom left;
+}
