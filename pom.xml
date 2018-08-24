@@ -131,6 +131,14 @@
 		<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-logging-1.2.jar</systemPath>
 		</dependency>
 
+		<dependency>
+			<groupId>org.occourts</groupId>
+			<artifactId>log4j-core-2.11.0</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+		<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/log4j-core-2.11.0.jar</systemPath>
+		</dependency>
+		
 
 	</dependencies>
 	<repositories>
