@@ -106,8 +106,21 @@
     	<version>20180130</version>
 		</dependency>
 
+		<dependency>
+    <groupId>org.occourts</groupId>
+    <artifactId>occourts</artifactId>
+    <version>1.0</version>
+    <scope>system</scope>
+    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/</systemPath>
+</dependency>
+
 	</dependencies>
 	<repositories>
+		 <repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/src/main/webapp/WEB-INF/lib</url>
+		  </repository>	
 		<repository>
 			<id>maven.oracle.com</id>
 			<name>oracle-maven-repo</name>
