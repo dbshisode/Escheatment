@@ -1,3 +1,10 @@
+<!-- 
+appconfig-root.xml is the configuration file used by Spring for MVC, datasource, etc.
+$Revision: 4502 $
+$Author: cbarrington $
+$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+ -->
+
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -64,7 +71,7 @@
 		<property name="url"
 			value="jdbc:oracle:thin:@v3dbdev1:1521:V3TRAIN" />
 		<property name="username" value="escheatment_user" />
-		<property name="password" value="E$ch@tm3n71" />
+		<property name="password" value="E$ch@tm3n7" />
 	</bean>
 
 	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 

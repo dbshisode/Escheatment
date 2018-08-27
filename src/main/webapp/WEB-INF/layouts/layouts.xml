@@ -2,49 +2,108 @@
  <!DOCTYPE tiles-definitions PUBLIC  
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!-- 
+layouts.xml is the configuration file used by Apache Tiles for view composition.
+$Revision: 4512 $
+$Author: cbarrington $
+$Date: 2018-08-24 15:52:51 -0700 (Fri, 24 Aug 2018) $
+ -->
+ 
 <tiles-definitions>
-	
-	<definition name="baseDefinition" template="/WEB-INF/views/template/base_template.jsp">
-		<put-attribute name="title" value="" />
-		<put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
-		<put-attribute name="datatables" value="/WEB-INF/views/includes/datatables.jsp" />
-		<put-attribute name="datatablesinit" value="/WEB-INF/views/includes/wqtable-init.jsp" />
-		<put-attribute name="nav" value="/WEB-INF/views/includes/nav-ops.jsp" />
-		<put-attribute name="bodytag" value="" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
-	</definition>
-	
-	<definition name="index" extends="baseDefinition">
-		<put-attribute name="title" value="Escheatment Application Login" />
-		<put-attribute name="datatables" value="" />
-		<put-attribute name="datatablesinit" value="" />		
-		<put-attribute name="nav" value="/WEB-INF/views/includes/nav-home.jsp" />
-		<put-attribute name="bodytag" value="/WEB-INF/views/includes/body-tag.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/login-body.jsp" />		
-		<put-attribute name="footer" value="" />
-	</definition>	
-	
-	<definition name="review-ops" extends="baseDefinition">
-		<put-attribute name="title" value="Escheatment Application - Operations Review" />
-		<put-attribute name="bodytag" value="/WEB-INF/views/includes/review-ops-body-tag.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/review-ops-body.jsp" />
+              
+              <definition name="baseDefinition" template="/WEB-INF/views/template/base_template.jsp">
+                             <put-attribute name="title" value="" />
+                             <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
+                             <put-attribute name="datatables" value="/WEB-INF/views/includes/datatables.jsp" />
+                             <put-attribute name="datatablesinit" value="/WEB-INF/views/includes/wqtable-init.jsp" />
+                             <put-attribute name="nav" value="/WEB-INF/views/includes/nav-ops.jsp" />
+                             <put-attribute name="bodytag" value="" />
+                             <put-attribute name="body" value="" />
+                             <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+              </definition>
+              
+              <definition name="index" extends="baseDefinition">
+                             <put-attribute name="title" value="Escheatment Application Login" />
+                             <put-attribute name="datatables" value="" />
+                             <put-attribute name="datatablesinit" value="" />                          
+                             <put-attribute name="nav" value="/WEB-INF/views/includes/nav-home.jsp" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/login-body.jsp" />                      
+                             <put-attribute name="footer" value="" />
+              </definition>            
+              
+              <definition name="logout" extends="baseDefinition">
+                             <put-attribute name="title" value="Escheatment Application Login" />
+                             <put-attribute name="datatables" value="" />
+                             <put-attribute name="datatablesinit" value="" />                          
+                             <put-attribute name="nav" value="/WEB-INF/views/includes/nav-home.jsp" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/logout-body.jsp" />                      
+                             <put-attribute name="footer" value="" />
+              </definition>  
+              
+			  <definition name="admin" extends="baseDefinition">
+                             <put-attribute name="title" value="Escheatment Application - Admin" />                        
+                             <put-attribute name="nav" value="/WEB-INF/views/includes/nav-admin.jsp" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/admin-body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/admin-body.jsp" />                      
+                             <put-attribute name="footer" value="" />
+              </definition> 
+              
+			  <definition name="admin-add-form" extends="baseDefinition">
+                             <put-attribute name="title" value="" />
+                             <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
+                             <put-attribute name="datatables" value="" />
+                             <put-attribute name="datatablesinit" value="" />
+                             <put-attribute name="nav" value="" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/admin-body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/admin-add-body.jsp" />
+                             <put-attribute name="footer" value="" />
+              </definition>    
+              
+              <definition name="admin-add-save-success" extends="baseDefinition">
+                             <put-attribute name="title" value="" />
+                             <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
+                             <put-attribute name="datatables" value="" />
+                             <put-attribute name="datatablesinit" value="" />
+                             <put-attribute name="nav" value="" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/admin-body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/admin-add-save-success-body.jsp" />
+                             <put-attribute name="footer" value="" />
+              </definition>
+              
+			  <definition name="admin-edit-form" extends="baseDefinition">
+                             <put-attribute name="title" value="" />
+                             <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
+                             <put-attribute name="datatables" value="" />
+                             <put-attribute name="datatablesinit" value="" />
+                             <put-attribute name="nav" value="" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/admin-body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/admin-edit-body.jsp" />
+                             <put-attribute name="footer" value="" />
+              </definition>               
+              
+              <definition name="admin-edit-save-success" extends="baseDefinition">
+                             <put-attribute name="title" value="" />
+                             <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
+                             <put-attribute name="datatables" value="" />
+                             <put-attribute name="datatablesinit" value="" />
+                             <put-attribute name="nav" value="" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/admin-body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/admin-edit-save-success-body.jsp" />
+                             <put-attribute name="footer" value="" />
+              </definition>
+                            
+              <definition name="review-ops" extends="baseDefinition">
+                             <put-attribute name="title" value="Escheatment Application - Operations Review" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/review-ops-body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/review-ops-body.jsp" />
 
-	</definition>
-	
-	<definition name="active-ops" extends="baseDefinition">
-		<put-attribute name="title" value="Escheatment Application - Marked as Active" />
-		<put-attribute name="bodytag" value="/WEB-INF/views/includes/active-ops-body-tag.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/active-ops-body.jsp" />
-	</definition>	
-	
-	<definition name="genericerror" extends="baseDefinition">
-		<put-attribute name="title" value="Escheatment Application - Error" />
-		<put-attribute name="bodytag" value="/WEB-INF/views/includes/review-ops-body-tag.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/review-ops-body.jsp" />
-		<put-attribute name="datatables" value="" />
-		<put-attribute name="datatablesinit" value="" />	
-
-	</definition>
-		
+              </definition>
+              
+              <definition name="active-ops" extends="baseDefinition">
+                             <put-attribute name="title" value="Escheatment Application - Marked as Active" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/active-ops-body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/active-ops-body.jsp" />
+              </definition>     
 </tiles-definitions>

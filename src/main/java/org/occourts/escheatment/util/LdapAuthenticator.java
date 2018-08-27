@@ -17,9 +17,13 @@ import com.novell.ldap.LDAPException;
 import com.novell.ldap.LDAPSearchResults;
 
 /**
- *
- * @author cbarrington
- */
+* LdapAuthenticator contains methods necessary to connect to a domain controller using LDAP 
+* for user authentication (validation of user password stored in AD)
+* $Revision: 4500 $     
+* $Author: cbarrington $ 
+* $Date: 2018-08-14 15:57:31 -0700 (Tue, 14 Aug 2018) $    
+*/
+
 public class LdapAuthenticator extends EscheatmentObject {
 	public String getHost() {
 		return (host == null || host.trim().length() < 1) ? getDefaultHost() : host;

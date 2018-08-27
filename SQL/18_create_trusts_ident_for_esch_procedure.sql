@@ -21,6 +21,7 @@ AS
   Ver        Date        Author           Description
   ---------  ----------  ---------------  ------------------------------------
   1.0        08/03/2018  cbarrington      1. Created this procedure.
+  1.1        08/14/2018  cbarrington      2. Added log table entries
 
  ******************************************************************************/
 
@@ -78,11 +79,17 @@ BEGIN
           fnftl.filing_fee_type_id = f.filing_fee_type_id and
           fnftl.fee_type_id in (9000070) and
           not exists (select et.trust_id from escheatment.trust et where et.trust_id = t.trust_id);   
+          
+   INSERT INTO escheatment.log (log_id,category,proc_name,proc_status,message,create_dt)
+   values (escheatment.log_seq.nextval,'PROC','GET_TRUSTS_IDENT_FOR_ESCH','COMPLETE',null,sysdate);
+   
+   commit;          
   
 EXCEPTION
 WHEN NO_DATA_FOUND THEN
   out_return_code    := '0';
-  out_return_message := 'No records found.';
+  out_return_message := 'No records found.';  
+  
 WHEN OTHERS THEN
   v_ErrorMsg := SUBSTR
   (
@@ -91,10 +98,15 @@ WHEN OTHERS THEN
   ;
   v_ErrorTrace := SUBSTR
   (
-    DBMS_UTILITY.format_error_backtrace,1,4000
+    DBMS_UTILITY.format_error_backtrace,1,295
   )
   ;
   out_return_message := v_ErrorMsg || ' - ' || v_ErrorTrace; 
   out_return_code := '-1';
+  
+  INSERT INTO escheatment.log (log_id,category,proc_name,proc_status,message,create_dt)
+  values (escheatment.log_seq.nextval,'PROC','GET_TRUSTS_IDENT_FOR_ESCH','FAILED',out_return_message,sysdate);
+   
+  commit;   
   
 END GET_TRUSTS_IDENT_FOR_ESCH;

@@ -1,7 +1,7 @@
 /*
  jquery.layout 1.3.0 - Release Candidate 29.15
- $Date: 2011-06-25 08:00:00 (Sat, 25 Jun 2011) $
- $Rev: 302915 $
+ $Date: 2018-08-14 15:18:12 -0700 (Tue, 14 Aug 2018) $
+ $Rev: 4497 $
 
  Copyright (c) 2010 
  Fabrizio Balliano (http://www.fabrizioballiano.net)

@@ -1,29 +1,17 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<%--
+logout-body.jsp is the body of the logout view.  It contains a form to allow users to provide user name and password,
+so the user may log back in if necessary
+$Revision: 4501 $
+$Author: cbarrington $
+$Date: 2018-08-15 07:14:20 -0700 (Wed, 15 Aug 2018) $
+ --%>
 
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap.css" />" rel="stylesheet">
-        <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap-theme.min.css" />">
-        <link rel="stylesheet" href="<c:url value="/resources/css/main.css" />">
-
-        <script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery-3.3.1.min.js" />"></script>
-        <script src="<c:url value="/resources/bootstrap/js/bootstrap.js" />"></script>
-
-        <title>Escheatment Application Login</title>
-
-    </head>
-
-    <body>	
-
-    <%@include file="includes/nav-home.jsp" %>
-
-    <div class="col-lg-6 col-lg-offset-3">
+<div class="col-lg-6 col-lg-offset-3">
         <div class="well">
             <div class="container">
                 <div class="row">
@@ -44,7 +32,8 @@
                                     	<button type="submit" name="submit" cssClass="btn btn-primary pull-right">Login</button>
                                     </div>
                                 </div>                                
-                                <%-- <form:hidden path="pageName" name="pageName" value="login" /> --%>
+                                <form:hidden path="firstName" name="firstName" value="firstName" />
+                                <form:hidden path="lastName" name="lastName" value="lastName" />
 								
                             </fieldset>
                         </form:form>
@@ -57,12 +46,8 @@
                         You have successfully logged out.
                     </div>
                     <div class="col-md-1"></div>
-                </div>          
+                </div>  
 			                  
             </div>
         </div>
     </div>
-
-
-</body>
-</html>

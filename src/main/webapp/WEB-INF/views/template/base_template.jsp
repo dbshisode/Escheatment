@@ -4,6 +4,13 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
+<%--
+base_template.jsp is the base template used by all pages
+$Revision: 4502 $
+$Author: cbarrington $
+$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+ --%> 
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->

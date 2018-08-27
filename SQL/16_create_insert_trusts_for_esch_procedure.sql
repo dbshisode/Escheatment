@@ -25,6 +25,7 @@ AS
   Ver        Date        Author           Description
   ---------  ----------  ---------------  ------------------------------------
   1.0        08/03/2018  cbarrington      1. Created this procedure.
+  1.1        08/14/2018  cbarrington      2. Added log table entries
 
  ******************************************************************************/
 
@@ -48,7 +49,11 @@ BEGIN
         END LOOP;
         CLOSE v_rowsToInsert;
     END IF;
-    
+
+   INSERT INTO escheatment.log (log_id,category,proc_name,proc_status,message,create_dt)
+   values (escheatment.log_seq.nextval,'PROC','INSERT_TRUSTS_IDENT_FOR_ESCH','COMPLETE',null,sysdate);
+   
+   commit;
   
 EXCEPTION
 
@@ -60,10 +65,17 @@ WHEN OTHERS THEN
   ;
   v_ErrorTrace := SUBSTR
   (
-    DBMS_UTILITY.format_error_backtrace,1,4000
+    DBMS_UTILITY.format_error_backtrace,1,295
   )
   ;
+
   out_return_message := v_ErrorMsg || ' - ' || v_ErrorTrace; 
   out_return_code := '-1';
+  
+  INSERT INTO escheatment.log (log_id,category,proc_name,proc_status,message,create_dt)
+  values (escheatment.log_seq.nextval,'PROC','INSERT_TRUSTS_IDENT_FOR_ESCH','FAILED',out_return_message,sysdate);
+   
+  commit;  
+
   
 END INSERT_TRUSTS_IDENT_FOR_ESCH;

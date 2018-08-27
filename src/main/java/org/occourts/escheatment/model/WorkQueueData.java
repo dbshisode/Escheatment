@@ -1,5 +1,13 @@
 package org.occourts.escheatment.model;
 
+/**
+* WorkQueueData contains get and set methods for the WorkQueueData object. The object is used to store
+* information for the various fields in a work queue
+* $Revision: 4500 $     
+* $Author: cbarrington $ 
+* $Date: 2018-08-14 15:57:31 -0700 (Tue, 14 Aug 2018) $    
+*/
+
 public class WorkQueueData {
 
 	   String displayCaseNum;

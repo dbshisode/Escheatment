@@ -3,6 +3,13 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
+<%--
+login-body.jsp is the body of the index view.  It contains a form to allow users to provide user name and password.
+$Revision: 4512 $
+$Author: cbarrington $
+$Date: 2018-08-24 15:52:51 -0700 (Fri, 24 Aug 2018) $
+ --%>
+
 <div class="col-lg-6 col-lg-offset-3">
         <div class="well">
             <div class="container">
@@ -24,7 +31,8 @@
                                     	<button type="submit" name="submit" cssClass="btn btn-primary pull-right">Login</button>
                                     </div>
                                 </div>                                
-                                <%-- <form:hidden path="pageName" name="pageName" value="login" /> --%>
+                                <form:hidden path="firstName" name="firstName" value="firstName" />
+                                <form:hidden path="lastName" name="lastName" value="lastName" />
 								
                             </fieldset>
                         </form:form>

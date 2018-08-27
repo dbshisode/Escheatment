@@ -6,60 +6,37 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.occourts.escheatment.dao.WorkQueueDataDAO;
 import org.occourts.escheatment.model.WorkQueueData;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+* WorkQueueDataDAOImpl contains methods that query the database for counts of items in work queues, 
+* and all data necessary to display the content of a work queue
+* $Revision: 4500 $     
+* $Author: cbarrington $ 
+* $Date: 2018-08-14 15:57:31 -0700 (Tue, 14 Aug 2018) $    
+*/
+
 public class WorkQueueDataDAOImpl implements WorkQueueDataDAO {
-	
-	static String mockedData = "{\r\n" + 
-			"    \"wqdata\": [\r\n" + 
-			"         {\r\n" + 
-			"              \"bal\": \"1230.00\",\r\n" + 
-			"              \"short_title\": \"Asset Protection\",\r\n" + 
-			"              \"comments\": \"Asset Protection Trust\",\r\n" + 
-			"              \"create_dt\": \"01-01-2018\",\r\n" + 
-			"              \"display_case_num\": \"A12345\",\r\n" + 
-			"              \"orig_amt\": \"2000\",\r\n" + 
-			"              \"trust_id\": \"12345\",\r\n" + 
-			"              \"trust_num\": \"1234567890\",\r\n" + 
-			"              \"trust_type\": \"Asset Protection\"\r\n" + 
-			"         },\r\n" + 
-			"         {\r\n" + 
-			"              \"bal\": \"230.00\",\r\n" + 
-			"              \"short_title\": \"Charitable\",\r\n" + 
-			"              \"comments\": \"Charitable Trust\",\r\n" + 
-			"              \"create_dt\": \"01-01-2018\",\r\n" + 
-			"              \"display_case_num\": \"A12345\",\r\n" + 
-			"              \"orig_amt\": \"3000\",\r\n" + 
-			"              \"trust_id\": \"12346\",\r\n" + 
-			"              \"trust_num\": \"1234567891\",\r\n" + 
-			"              \"trust_type\": \"Charitable\"\r\n" + 
-			"         }		 \r\n" + 
-			"    ]\r\n" + 
-			"}"; 
 
 	private DataSource dataSource;
-	private JdbcTemplate template;
+	JdbcTemplate template;
 
 	public void setTemplate(JdbcTemplate template) {
 		this.template = template;
 	}
 
 	public int getOpsActiveCount() {
-		/*String SQL = "select count(*) as cnt from escheatment.trust where status_id = 1 and marked_as_active = 'Y'";
+		String SQL = "select count(*) as cnt from escheatment.trust where status_id = 1 and marked_as_active = 'Y'";
 		Integer iOpsActiveCount = (Integer) this.template.queryForObject(SQL, Integer.class);
-		return iOpsActiveCount;*/
-		return 2;
+		return iOpsActiveCount;
 	}
 
 	public int getOpsSentCount() {
-		/*String SQL = "select count(*) as cnt from escheatment.trust where status_id = 2";
+		String SQL = "select count(*) as cnt from escheatment.trust where status_id = 2";
 		Integer iOpsSentCount = (Integer) this.template.queryForObject(SQL, Integer.class);
-		return iOpsSentCount;*/
-		return 2;
+		return iOpsSentCount;
 	}
 
 	public String MarkAsActive() {
@@ -68,15 +45,14 @@ public class WorkQueueDataDAOImpl implements WorkQueueDataDAO {
 	}
 
 	public int getOpsReviewCount() {
-		/*String SQL = "select count(*) as cnt from escheatment.trust where status_id = 1 and marked_as_active = 'N'";
+		String SQL = "select count(*) as cnt from escheatment.trust where status_id = 1 and marked_as_active = 'N'";
 		Integer iOpsReviewCount = (Integer) this.template.queryForObject(SQL, Integer.class);
-		return iOpsReviewCount;*/
-		return 2;
+		return iOpsReviewCount;
 	}
 
 	public List<WorkQueueData> fetchOpsReviewData() {
 		List<WorkQueueData> workQueueDataList = new ArrayList<WorkQueueData>();
-		/*String SQL = "select c.display_case_num,\n" + 
+		String SQL = "select c.display_case_num,\n" + 
 		             "       c.short_title,\n" + 
 				     "       t.trust_id,\n" +
 				     "       t.trust_num,\n" + 
@@ -111,25 +87,6 @@ public class WorkQueueDataDAOImpl implements WorkQueueDataDAO {
 			wqData.setTrustId(Long.parseLong(row.get("trust_id").toString()));
 			wqData.setTrustNum(Long.parseLong(row.get("trust_num").toString()));
 			wqData.setTrustType((row.get("trust_type") != null ? row.get("trust_type") : "-").toString());
-			workQueueDataList.add(wqData);
-		}*/
-		//Reading mocked Data instead:
-		WorkQueueData wqData = new WorkQueueData();		
-		JSONObject obj = new JSONObject(mockedData);
-		JSONArray arr = obj.getJSONArray("wqdata");
-		for (int i = 0; i < arr.length(); i++)
-		{
-			wqData = new WorkQueueData();
-			wqData.setBalance(Float.parseFloat(arr.getJSONObject(i).getString("bal")));
-			wqData.setCaseTitle((arr.getJSONObject(i).getString("short_title") != null ? arr.getJSONObject(i).getString("short_title") : "-").toString());
-			wqData.setComments((arr.getJSONObject(i).getString("comments") != null ? arr.getJSONObject(i).getString("comments") : "-").toString());
-			wqData.setDepositDate((arr.getJSONObject(i).getString("create_dt") != null ? arr.getJSONObject(i).getString("create_dt") : "-").toString());
-			wqData.setDisplayCaseNum(
-					(arr.getJSONObject(i).getString("display_case_num") != null ? arr.getJSONObject(i).getString("display_case_num") : "-").toString());
-			wqData.setOrigAmt(Float.parseFloat(arr.getJSONObject(i).getString("orig_amt").toString()));
-			wqData.setTrustId(Long.parseLong(arr.getJSONObject(i).getString("trust_id").toString()));
-			wqData.setTrustNum(Long.parseLong(arr.getJSONObject(i).getString("trust_num").toString()));
-			wqData.setTrustType((arr.getJSONObject(i).getString("trust_type") != null ? arr.getJSONObject(i).getString("trust_type") : "-").toString());
 			workQueueDataList.add(wqData);
 		}
 		return workQueueDataList;

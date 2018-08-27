@@ -7,6 +7,14 @@ import org.occourts.escheatment.model.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+* AuthenticationInterceptor is injected prior to the display of each page within the application
+* to ensure the requester has authenticated and has a valid session
+* $Revision: 4500 $     
+* $Author: cbarrington $ 
+* $Date: 2018-08-14 15:57:31 -0700 (Tue, 14 Aug 2018) $    
+*/
+
 public class AuthenticationInterceptor implements HandlerInterceptor {
 
 	// AuthenticationInterceptor.java

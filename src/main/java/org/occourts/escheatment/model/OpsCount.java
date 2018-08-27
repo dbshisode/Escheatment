@@ -1,5 +1,13 @@
 package org.occourts.escheatment.model;
 
+/**
+* OpsCount contains get and set methods for the OpsCount object. The object is used to display
+* work queue item counts in the application navigation tabs
+* $Revision: 4500 $     
+* $Author: cbarrington $ 
+* $Date: 2018-08-14 15:57:31 -0700 (Tue, 14 Aug 2018) $    
+*/
+
 public class OpsCount {
 	private int opsReviewCount;
 	private int opsActiveCount;

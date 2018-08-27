@@ -19,13 +19,15 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.occourts.escheatment.model.User;
 
 /**
- * Root object. Contains utility methods.
- *
- * @author MTariq
- * @version 1.0, 8/3/2009
- */
+* EscheatmentObject contains utility methods used in various areas of the application.
+* $Revision: 4511 $     
+* $Author: cbarrington $ 
+* $Date: 2018-08-24 08:26:17 -0700 (Fri, 24 Aug 2018) $    
+*/
+
 abstract public class EscheatmentObject implements Serializable {
 
 	// static final public Logger logger = Logger.getLogger( EscheatmentObject.class
@@ -547,4 +549,10 @@ abstract public class EscheatmentObject implements Serializable {
 		}
 	}
 
+	static public boolean isAdmin(User loggedinUser) {
+		return loggedinUser!=null && 
+				loggedinUser.getUserRoleAdmin()!=null && 
+				loggedinUser.getUserRoleAdmin().intValue() >= UserConstants.FUNC_ADMIN_ROLE;
+	}	
+	
 }

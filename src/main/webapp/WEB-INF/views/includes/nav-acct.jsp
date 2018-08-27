@@ -1,3 +1,10 @@
+<%--
+nav-acct.jsp is the navigation used for pages displayed for users with the Accounting role
+$Revision: 4502 $
+$Author: cbarrington $
+$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+ --%>
+
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">             

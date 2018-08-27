@@ -9,9 +9,12 @@ import com.novell.ldap.LDAPException;
 import com.novell.ldap.LDAPSearchResults;
 
 /**
- *
- * @author v2dao
- */
+* ActiveDirectory contains the necessary methods authenticate a user with Active Directory
+* $Revision: 4500 $     
+* $Author: cbarrington $ 
+* $Date: 2018-08-14 15:57:31 -0700 (Tue, 14 Aug 2018) $    
+*/
+
 public class ActiveDirectory extends LdapAuthenticator {
 	public String getNtDomain() {
 		return (ntDomain == null || ntDomain.trim().length() < 1) ? getDefaultNtDomain() : ntDomain;

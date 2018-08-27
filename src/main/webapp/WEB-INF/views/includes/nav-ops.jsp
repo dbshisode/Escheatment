@@ -1,3 +1,10 @@
+<%--
+nav-ops.jsp is the navigation used for pages displayed for users with the Operations role
+$Revision: 4502 $
+$Author: cbarrington $
+$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+ --%>
+ 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
         <nav class="navbar navbar-inverse navbar-fixed-top">

@@ -1,3 +1,10 @@
+<!-- 
+web.xml is the configuration file used by the application server.
+$Revision: 4502 $
+$Author: cbarrington $
+$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+ -->
+ 
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee

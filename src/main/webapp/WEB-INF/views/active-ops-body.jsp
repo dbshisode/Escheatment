@@ -1,5 +1,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+<%--
+active-ops-body.jsp is the body of the active-ops view.  It contains a table of items for this work queue.
+$Revision: 4502 $
+$Author: cbarrington $
+$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+ --%>
    
         <div id="wrap">
             <div id="main" class="container pull-left">

@@ -5,7 +5,7 @@
  * Description: Unit test framework
  * Author:      Allan Jardine (www.sprymedia.co.uk)
  * Created:     Sun Mar  8 22:02:49 GMT 2009
- * Modified:    $Date$ by $Author$
+ * Modified:    $Date: 2018-08-14 15:18:12 -0700 (Tue, 14 Aug 2018) $ by $Author: cbarrington $
  * Language:    Javascript
  * License:     GPL v2 or BSD 3 point style
  * Project:     DataTables
