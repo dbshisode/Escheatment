@@ -1,8 +1,8 @@
 <%--
 nav-ops.jsp is the navigation used for pages displayed for users with the Operations role
-$Revision: 4502 $
+$Revision: 4513 $
 $Author: cbarrington $
-$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+$Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
  --%>
  
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -16,7 +16,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
                 <a href="active" class="btn btn-lg navbar-btn ${tab2State}" role="button">Marked as Active <span class="badge">${opsCount.opsActiveCount}</span></a>
                 <a href="sent" class="btn btn-lg navbar-btn ${tab3State}" role="button">&nbsp;&nbsp;&nbsp;Notice Sent <span class="badge">${opsCount.opsSentCount}</span>&nbsp;&nbsp;&nbsp;</a>
                 <ul class="nav navbar-nav navbar-right">                    
-                    <li><a href="admin"><span class="glyphicon glyphicon-cog"></span> Admin</a></li>
+                    <c:if test="${user.userFunctionalArea == UserConstants.FUNC_ADMIN_ROLE}"><li><a href="admin"><span class="glyphicon glyphicon-cog"></span> Admin</a></li></c:if>
                     <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>     
             </div>

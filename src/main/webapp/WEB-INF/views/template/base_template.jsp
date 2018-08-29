@@ -6,9 +6,9 @@
 
 <%--
 base_template.jsp is the base template used by all pages
-$Revision: 4502 $
+$Revision: 4513 $
 $Author: cbarrington $
-$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+$Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
  --%> 
 
 <!doctype html>
@@ -22,7 +22,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <link rel="stylesheet" href="<c:url value="/resources/css/main.css" />">
+<%--         <link rel="stylesheet" href="<c:url value="/resources/css/main.css" />"> --%>
 
 		<tiles:insertAttribute name="bootstrap" />
 		
@@ -37,6 +37,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
 
 	<tiles:insertAttribute name="datatables" />
 	<tiles:insertAttribute name="datatablesinit" />
+	<tiles:insertAttribute name="modal" />
 	
 	<tiles:insertAttribute name="footer" />
 </body>

@@ -13,8 +13,8 @@ import org.occourts.escheatment.model.WorkQueueData;
 import org.occourts.escheatment.util.UserConstants;
 import org.occourts.escheatment.util.EscheatmentObject;
 import org.occourts.escheatment.validator.UserValidator;
-import org.occourts.escheatment.validator.AddUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +23,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,9 +33,9 @@ import org.springframework.web.servlet.ModelAndView;
 /**
 * MainController provides mapping and necessary business logic required for navigation 
 * within the application, as well as user validation and session management
-* $Revision: 4512 $     
+* $Revision: 4513 $     
 * $Author: cbarrington $ 
-* $Date: 2018-08-24 15:52:51 -0700 (Fri, 24 Aug 2018) $    
+* $Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $    
 */
 
 @Controller
@@ -138,14 +139,15 @@ public class MainController {
 
 	}	
 	
-	@RequestMapping(value = "/admin-add-save")
-	public @ResponseBody ModelAndView adminaddsave(@ModelAttribute("user") @Validated User user, BindingResult result, Model model, HttpSession session) {
+	@RequestMapping(value = "/admin-add-save", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String adminaddsave(@ModelAttribute("user") @Validated @RequestBody User user, BindingResult result, Model model, HttpSession session) {
 		
 		if (result.hasErrors() && user.getPassword().length() > 0) {
-			model.addAttribute("opsRoleValue",UserConstants.OPS_ROLE);
-			model.addAttribute("acctRoleValue",UserConstants.ACCT_ROLE);
-			model.addAttribute("funcAdminRoleValue",UserConstants.FUNC_ADMIN_ROLE);					
-			return new ModelAndView("admin-add-form");
+			//model.addAttribute("opsRoleValue",UserConstants.OPS_ROLE);
+			//model.addAttribute("acctRoleValue",UserConstants.ACCT_ROLE);
+			//model.addAttribute("funcAdminRoleValue",UserConstants.FUNC_ADMIN_ROLE);					
+			//return new ModelAndView("admin-add-form");
+			return "{'status' : 'OK'}";
 		}		
 		
 		User loggedinUser = (User) session.getAttribute("user");		
@@ -156,13 +158,13 @@ public class MainController {
 			
 			model.addAttribute("userdata", user);						
 			if (addUserResult == true) {
-				return new ModelAndView("admin-add-save-success");
+				return "{'status' : 'OK'}";
 			} else {
-				return new ModelAndView("admin-add-save-error");
+				return "{'status' : 'USER_ID_EXISTS'}";
 			}
 			
 		} else {
-			return new ModelAndView("index");
+			return "{'status' : 'AUTH_NOT_ALLOWED'}";
 		}
 
 	}		
@@ -228,6 +230,11 @@ public class MainController {
 		return displayReviewPage(model, session);
 
 	}*/
+	
+	@RequestMapping(path = "/comments")
+	public String comments(@ModelAttribute("user") User user, Model model) {
+		return "comments";
+	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView displayLogoutPage(@ModelAttribute("user") User user, Model model, HttpSession session) {

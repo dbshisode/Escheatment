@@ -3,9 +3,9 @@
 
 <%--
 review-ops-body.jsp is the body of the review-ops view.  It contains a table of items for this work queue.
-$Revision: 4502 $
+$Revision: 4513 $
 $Author: cbarrington $
-$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+$Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
  --%>
     
         <div id="wrap">
@@ -61,7 +61,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
                                         <td align="right">$<c:out value="${items.balance}" /></td>
                                         <td>
                                             <c:out value="${items.comments}" escapeXml="false"/>
-											<%-- <form:textarea path="commentText" rows="3" cols="12" /> --%>
+											<a href="comments" rel="modal:open">add</a>
                                         </td>
                                          <td align="right"><%--<input type="submit" name="trustId" id="${items.trustId}" cssClass="btn-default" value="Mark as Active" />--%></td> 
                                         <td align="right"><button type="button" class="btn-default">Send Notice</button> 
