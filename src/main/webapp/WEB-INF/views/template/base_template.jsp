@@ -6,9 +6,9 @@
 
 <%--
 base_template.jsp is the base template used by all pages
-$Revision: 4513 $
+$Revision: 4519 $
 $Author: cbarrington $
-$Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
+$Date: 2018-09-04 13:38:45 -0700 (Tue, 04 Sep 2018) $
  --%> 
 
 <!doctype html>
@@ -36,7 +36,6 @@ $Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
 	<tiles:insertAttribute name="body" />
 
 	<tiles:insertAttribute name="datatables" />
-	<tiles:insertAttribute name="datatablesinit" />
 	<tiles:insertAttribute name="modal" />
 	
 	<tiles:insertAttribute name="footer" />

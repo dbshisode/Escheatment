@@ -13,11 +13,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
         <div id="wrap">
             <div id="main" class="container pull-left">
                 <!-- Example row of columns -->
-                <br><br>
-                <!--<div class="panel panel-primary">
-                    <div class="panel-heading">Escheatment for Publication</div>
-                    <div class="panel-body">Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</div>
-                </div>-->     
+                <br><br>    
                 <div class="row">
                     <div class="col-6 col-sm-6 col-lg-4">
                         <h2>Escheatment Users</h2>
@@ -31,9 +27,9 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
                             <div class="panel-heading">Current Users</div>
 
                             <div class="panel-body">
-                                <form:form modelAttribute="reviewForm" id="reviewForm" action="reviewForm" theme="bootstrap" method="post">
+                                <form:form id="adminForm" action="adminForm" theme="bootstrap" method="post">
                             <!-- Table -->                               
-                            <table class="table table-striped" id="wqTable"> 
+                            <table class="table table-striped" id="currUsersTable"> 
                                 <thead> 
                                     <tr> 
                                         <th>&nbsp;</th> 
@@ -44,10 +40,13 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
                                         <th>Admin</th>    
                                         <th>Active</th>                                                                                                                                                      
                                     </tr> 
-                                </thead>                                     
-                                <c:forEach var="items" items="${userdata}">                                                                     
+                                </thead>           
+                                
+                                <%-- JSP (non-ajax) way of displaying data --%>                                                          
+                                <%--<c:forEach var="items" items="${userdata}">                                                                     
                                     <tr> 
-                                        <td align="center"><a onclick="window.open('admin-edit?userId=' + ${items.userId}, 'editUserWindow', 'toolbar=0,location=0,menubar=0,resizable=1,scrollbars=1,width=400,height=650');"><button type="button" class="btn-default">Edit</button></a></td> 
+                                        <!--  ?userId=' + ${items.userId} -->
+                                        <td align="center"><a href="admin-edit?userId=<c:out value="${items.userId}" />" id="admin-edit" rel="modal:open"><button type="button" class="btn-default">Edit</button></a></td> 
                                         <td><c:out value="${items.userName}" /></td> 
                                         <td><c:out value="${items.lastName}" /></td>
                                         <td><c:out value="${items.firstName}" /> <c:out value="${items.middleName}" /></td>
@@ -98,18 +97,47 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
                                         	</c:choose>                                         
                                         </td> 
                                     </tr>                                                                                                             
-								</c:forEach>                                                                    
+								</c:forEach>--%>                                                                    
                             </table>  
                             </form:form>
                             </div>
                         </div>  
-                        <!--<div id="btnContainer" class="pull-right">
-                            <button type="button" class="btn-default">Export to Excel</button>&nbsp;&nbsp;
-                            <button type="button" class="btn-default">Mark for Escheatment</button>                            
-                        </div>-->
                     </div>
                 </div>   
  
 
             </div> <!-- /container -->   
-        </div>
+        </div>        
+        
+        <script type="text/javascript">        
+        $(document).ready(function() {
+            var table = $('#currUsersTable').DataTable( {
+    			"ajax": {"url":"get-user-table","dataSrc":""},
+    			"deferRender": true,
+            	"order": [[ 2, "asc" ]], //last name
+            	"columns": [
+           			{"orderable": false, data: 'userId', render: function (data,type,row,meta) {return '<a href="admin-edit?userId=' + data + '" id="admin-edit" rel="modal:open"><button type="button" class="btn-default">Edit</button></a>' }}, //button
+           			{"orderable": true, data: 'userName' },
+           			{"orderable": true, data: 'lastName' },
+           			{"orderable": true, data: 'firstName' },
+           			{"orderable": true, 
+           				data: 'userFunctionalArea', 
+           				render: function (data,type,row,meta) {
+           					return data == 1 ? 'Operations' : 'Accounting'         					
+           				}
+           			},           				
+           			{"orderable": true, data: 'userRoleAdmin', render: function (data,type,row,meta) {return data > 0 ? 'Yes' : '&nbsp;'}},
+           			{"orderable": true, data: 'active', render: function (data,type,row,meta) {return data == 'Y' ? 'Yes' : '&nbsp;'}}
+           			]            		
+            });          
+            
+            //reload datatable when modal is closed, to show revised data
+            $(function() {
+    	        $(document).on($.modal.AFTER_CLOSE, refreshPage);
+    	        function refreshPage(event, modal) {    	        	
+    	        	table.ajax.reload();
+    	        }
+            });            
+            
+        });
+    	</script>

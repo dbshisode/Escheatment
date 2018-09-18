@@ -6,9 +6,9 @@ import org.occourts.escheatment.model.WorkQueueData;
 
 /**
 * WorkQueueDataDAO is an interface for Work Queue data
-* $Revision: 4500 $     
+* $Revision: 4523 $     
 * $Author: cbarrington $ 
-* $Date: 2018-08-14 15:57:31 -0700 (Tue, 14 Aug 2018) $    
+* $Date: 2018-09-14 09:26:52 -0700 (Fri, 14 Sep 2018) $    
 */
 
 public interface WorkQueueDataDAO {
@@ -16,7 +16,7 @@ public interface WorkQueueDataDAO {
 	public int getOpsActiveCount();
 	public int getOpsSentCount();
 	public int getOpsReviewCount();
-	public String MarkAsActive();
+	public boolean MarkAsActive(long trustId,String updatedByUserName);
 	
 	
 	public List<WorkQueueData> fetchOpsReviewData();	

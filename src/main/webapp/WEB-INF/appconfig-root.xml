@@ -1,8 +1,8 @@
 <!-- 
 appconfig-root.xml is the configuration file used by Spring for MVC, datasource, etc.
-$Revision: 4502 $
+$Revision: 4519 $
 $Author: cbarrington $
-$Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
+$Date: 2018-09-04 13:38:45 -0700 (Tue, 04 Sep 2018) $
  -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -62,6 +62,10 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+	    <constructor-arg index="0" ref="messageSource"/>
+	</bean>	
 
 	<!-- This is Datasource setting -->
 	<bean id="dataSource"

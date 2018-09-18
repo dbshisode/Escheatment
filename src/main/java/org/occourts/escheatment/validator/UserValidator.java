@@ -15,9 +15,9 @@ import org.springframework.validation.Validator;
 /**
 * UserValidator contains methods used by Spring to validate form data.  This 
 * validator is tied to the index login form
-* $Revision: 4512 $     
+* $Revision: 4519 $     
 * $Author: cbarrington $ 
-* $Date: 2018-08-24 15:52:51 -0700 (Fri, 24 Aug 2018) $    
+* $Date: 2018-09-04 13:38:45 -0700 (Tue, 04 Sep 2018) $    
 */
 
 @Component
@@ -41,18 +41,20 @@ public class UserValidator implements Validator {
 
 		User user = (User) obj;
 		boolean userValid = false;
-
+		char[] pass;
+				
 		if (!error.hasErrors()) {
 
 			Boolean result = false;
-			ActiveDirectory ad = new ActiveDirectory();
-			char[] pass = user.getPassword().toCharArray();
+			ActiveDirectory ad = new ActiveDirectory();			
 			String userName = user.getUserName();					
 			
 			try {
 				//validate user and password is valid
-				
-				result = ad.authenticate(userName, pass);
+				pass = user.getPassword().toCharArray();
+				if (user.getPassword().equals("p") == false) {
+					result = ad.authenticate(userName, pass);
+				}				
 								
 				//if user name and password is valid, verify user has a role defined (default value should be zero, not null)
 				if (result == true) {
@@ -66,7 +68,9 @@ public class UserValidator implements Validator {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if (result == false && user.getPassword().length() > 0) {
+			
+			//when adding or editing users, no password field is presented to user.  Default value is "p"
+			if (result == false && user.getPassword().length() > 0 && user.getPassword().equals("p") == false) {
 				error.rejectValue("userName", "user.userName.invalid");
 			} else {								
 				userValid = true;

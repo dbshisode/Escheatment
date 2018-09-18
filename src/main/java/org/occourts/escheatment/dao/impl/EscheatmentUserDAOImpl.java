@@ -23,9 +23,9 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 /**
 * EscheatmentUserDAOImpl provides methods to return User data
-* $Revision: 4511 $     
+* $Revision: 4519 $     
 * $Author: cbarrington $ 
-* $Date: 2018-08-24 08:26:17 -0700 (Fri, 24 Aug 2018) $    
+* $Date: 2018-09-04 13:38:45 -0700 (Tue, 04 Sep 2018) $    
 */
 
 public class EscheatmentUserDAOImpl implements EscheatmentUserDAO {
@@ -79,8 +79,8 @@ public class EscheatmentUserDAOImpl implements EscheatmentUserDAO {
 				"  u.update_dt,\n" + 
 				"  u.update_user_id,\n" + 
 				"  u.active,\n" +
-				"  (select ura.role_id from escheatment.user_role_assoc ura where ura.user_id = u.user_id and ura.role_id in (1,2)) as functional_area,\n" +
-				"  (select ura.role_id from escheatment.user_role_assoc ura where ura.user_id = u.user_id and ura.role_id in (3,4)) as admin_level\n" + 
+				"  (select max(ura.role_id) from escheatment.user_role_assoc ura where ura.user_id = u.user_id and ura.role_id in (1,2)) as functional_area,\n" +
+				"  (select max(ura.role_id) from escheatment.user_role_assoc ura where ura.user_id = u.user_id and ura.role_id in (3,4)) as admin_level\n" + 
 				"FROM escheatment.users u \n" + 
 				"WHERE UPPER(u.user_name) = ?";	
 		
@@ -117,8 +117,8 @@ public class EscheatmentUserDAOImpl implements EscheatmentUserDAO {
 				"  u.update_dt,\n" + 
 				"  u.update_user_id,\n" + 
 				"  u.active,\n" +
-				"  (select ura.role_id from escheatment.user_role_assoc ura where ura.user_id = u.user_id and ura.role_id in (1,2)) as functional_area,\n" +
-				"  (select ura.role_id from escheatment.user_role_assoc ura where ura.user_id = u.user_id and ura.role_id in (3,4)) as admin_level\n" + 
+				"  (select max(ura.role_id) from escheatment.user_role_assoc ura where ura.user_id = u.user_id and ura.role_id in (1,2)) as functional_area,\n" +
+				"  (select max(ura.role_id) from escheatment.user_role_assoc ura where ura.user_id = u.user_id and ura.role_id in (3,4)) as admin_level\n" + 
 				"FROM escheatment.users u \n" +
 				"ORDER BY u.last_name";
 		List<Map<String, Object>> rows = template.queryForList(SQL);
@@ -250,14 +250,14 @@ public class EscheatmentUserDAOImpl implements EscheatmentUserDAO {
 			template.update(new PreparedStatementCreator() {
 				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 					PreparedStatement ps = con.prepareStatement(userUpdateSql);
-					ps.setString(1, userCheck.getUserName());
+					ps.setString(1, user.getUserName());
 					ps.setString(2, user.getFirstName());
 					ps.setString(3, user.getMiddleName());
 					ps.setString(4, user.getLastName());
 					ps.setString(5, user.getActive());					
 					ps.setDate(6, new java.sql.Date(System.currentTimeMillis()));	
 					ps.setString(7, updatedByUserName);
-					ps.setLong(8, user.getUserId().intValue());
+					ps.setLong(8, userCheck.getUserId().intValue());
 					return ps;					
 				}
 				

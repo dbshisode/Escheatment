@@ -1,26 +1,23 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <%--
 review-ops-body.jsp is the body of the review-ops view.  It contains a table of items for this work queue.
-$Revision: 4513 $
+$Revision: 4523 $
 $Author: cbarrington $
-$Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
+$Date: 2018-09-14 09:26:52 -0700 (Fri, 14 Sep 2018) $
  --%>
     
         <div id="wrap">
             <div id="main" class="container pull-left">
                 <!-- Example row of columns -->
                 <br><br>
-                <!--<div class="panel panel-primary">
-                    <div class="panel-heading">Escheatment for Publication</div>
-                    <div class="panel-body">Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</div>
-                </div>-->     
                 <div class="row">
-                    <div class="col-6 col-sm-6 col-lg-4">
-                        <h2>Identified for Escheatment</h2>
-                        <%--<p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>--%>
+                    <div class="col-6 col-sm-6 col-lg-4" style="height:72px;">
+                        <h2>Identified for Escheatment</h2>                        
                     </div>
+                    <div class="col-6 col-sm-6 col-lg-4" id="messageBox"><div id="messageText"></div></div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -34,52 +31,193 @@ $Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
                             <table class="table table-striped" id="wqTable"> 
                                 <thead> 
                                     <tr> 
-                                        <th>#</th> 
-                                        <th>Case Number</th> 
-                                        <th>Case Title</th> 
-                                        <th>Trust Type</th> 
-                                        <th>Trust Number</th>                                                                         
-                                        <th>Deposit Date</th>
-                                        <th>Orig. Amt.</th>
-                                        <th>Balance</th>
-                                        <th>Comments</th>
-                                        <th>&nbsp;</th>
-                                        <th>&nbsp;</th>
+                                        <!--<th width="3%">#</th>--> 
+                                        <th width="10%">Case Number</th> 
+                                        <th width="15%">Case Title</th> 
+                                        <th width="10%">Trust Type</th> 
+                                        <th width="5%">Trust Number</th>  
+                                        <th width="5%">Lawful Owner Name</th>
+                                        <th width="5%">Lawful Owner Address</th>                                                                       
+                                        <th width="6%">Deposit Date</th>
+                                        <th width="7%">Orig. Amt.</th>
+                                        <th width="7%">Balance</th>
+                                        <th width="18%">Comments</th>
+                                        <th width="6%">&nbsp;</th>
+                                        <th width="6%">&nbsp;</th>
                                     </tr> 
-                                </thead>                                     
-                                <c:forEach var="items" items="${workqueuedata}">                                                                     
-                                    <tr> 
-                                        <th scope=row>                                            
-											<%-- <s:property value="%{#rowStatus.count}" /> --%>
-                                        </th> 
-                                        <td><a href="#" onclick="window.open('roa?caseId=10730922', 'getNote', 'toolbar=0,location=0,menubar=0,resizable=1,scrollbars=1');"><c:out value="${items.displayCaseNum}" /></a></td> 
+                                </thead>   
+                                <%-- JSP (non-ajax) way of displaying data --%>                                  
+                                <%--<c:forEach var="items" items="${workqueuedata}" varStatus="loop">                                                                     
+                                    <tr>  
+                                        <td><a href="#" onclick="window.open('roa?caseId=' + ${items.caseId}, 'getNote', 'toolbar=0,location=0,menubar=0,resizable=1,scrollbars=1');"><c:out value="${items.displayCaseNum}" /></a></td> 
                                         <td><c:out value="${items.caseTitle}" /></td> 
                                         <td><c:out value="${items.trustType}" /></td>
                                         <td><c:out value="${items.trustNum}" /></td>
                                         <td><c:out value="${items.depositDate}" /></td>
-                                        <td align="right">$<c:out value="${items.origAmt}" /></td>
-                                        <td align="right">$<c:out value="${items.balance}" /></td>
+										<td align="right">
+											<fmt:setLocale value = "en_US"/>
+											<fmt:formatNumber value = "${items.origAmt}" type = "currency"/>
+										</td>
+                                        <td align="right">
+											<fmt:setLocale value = "en_US"/>
+											<fmt:formatNumber value = "${items.balance}" type = "currency"/>                                        
                                         <td>
-                                            <c:out value="${items.comments}" escapeXml="false"/>
-											<a href="comments" rel="modal:open">add</a>
+                                            <span style='font-size:12px;'>
+                                            	<c:out value="${items.comments}" escapeXml="false"/>
+                                            	<c:if test="${items.commentCnt > 1}"><a href="comments" rel="modal:open">View All</a> | </c:if>
+												<a href="comments" rel="modal:open">Add Comment</a>
+											</span>
                                         </td>
-                                         <td align="right"><%--<input type="submit" name="trustId" id="${items.trustId}" cssClass="btn-default" value="Mark as Active" />--%></td> 
-                                        <td align="right"><button type="button" class="btn-default">Send Notice</button> 
-                                            <%--<s:hidden name="trustId" value="%{trustId}" />--%>
+                                         <td align="right"><button type="button" class="btn-default">Mark as Active</button></td> 
+                                        <td align="right"><button type="button" class="btn-default">Send Notice</button>                                             
                                         </td>
                                     </tr>                                                                                                             
-								</c:forEach>                                                                    
+								</c:forEach>--%>                                                                  
                             </table>  
                             </form:form>
                             </div>
                         </div>  
-                        <!--<div id="btnContainer" class="pull-right">
-                            <button type="button" class="btn-default">Export to Excel</button>&nbsp;&nbsp;
-                            <button type="button" class="btn-default">Mark for Escheatment</button>                            
-                        </div>-->
+                        <div id="btnContainer" class="pull-right">
+                            <button type="button" class="btn-default">Export to Excel</button>
+                        </div>
                     </div>
                 </div>   
  
 
             </div> <!-- /container -->   
         </div>
+        
+        <script type="text/javascript">
+        $(document).ready(function() {
+        	$('#wqTable').DataTable( {
+				"ajax": {"url":"get-ops-table","dataSrc":""},
+				"deferRender": true,            	
+	        	"order": [[ 3, "desc" ]], //trust number
+	        	"columns": [
+	       			//{"orderable": false }, //row number
+	       			{"orderable": true, data: 'displayCaseNum', render: function (data,type,row,meta) {return '<a href="#" onclick="openROA(\'' + data + '\');">' + data +'</a>'}},
+	       			{"orderable": true, data: 'caseTitle'},
+	       			{"orderable": true, data: 'trustType'},
+	       			{"orderable": true, data: 'trustNum'},
+	       			{"orderable": true, data: 'ownerName'},
+	       			{"orderable": true, data: 'ownerAddress'},
+	       			{"orderable": true, data: 'depositDate'},
+	       			{"orderable": true, data: 'origAmt', render: $.fn.dataTable.render.number( ',', '.', 2, '$' )},
+	       			{"orderable": true, data: 'balance', render: $.fn.dataTable.render.number( ',', '.', 2, '$' )},
+	       			{"orderable": true, data: 'comments', render: function (data,type,row,meta) {return data != '' ? '<span style="font-size:12px;">' + data + '<a href="comments" rel="modal:open">View All</a> | <a href="comments" rel="modal:open">Add Comment</a></span>' : '<span style="font-size:12px;"><a href="comments" rel="modal:open">Add Comment</a></span>' }},
+	       			{"orderable": false, data: 'trustId', render: function (data,type,row,meta) {return '<a href="#" onclick="markActive(' + data + ');" id="mark-active"><button type="button" class="btn-default">Mark as Active</button></a>' } }, //button
+	       			{"orderable": false, data: 'trustId', render: function (data,type,row,meta) {return '<a href="#" onclick="sendNotice(' + data + ');"><button type="button" class="btn-default">Send Notice</button></a>' } } //button
+	       			]            		
+	        });         
+        });
+        
+        function openROA(caseNum) {
+        	window.open('roa?caseNum=' + caseNum,
+        			    'getNote', 
+        			    'toolbar=0,location=0,menubar=0,resizable=1,scrollbars=1');
+        }
+        
+        function sendNotice(trustNum) {
+        	window.open('send-notice-unclaimed-funds?trustNum=' + trustNum,
+        			    'sendNotice', 
+        			    'left=50,top=50,width=800,height=785,toolbar=0,location=0,menubar=0,resizable=1,scrollbars=1');
+        }     
+        
+			function markActive(trustId) {
+				$
+						.ajax({
+							url : "mark-active?trustId=" + trustId,
+							type : 'POST',
+							//contentType: 'application/json',
+							data : $(
+									'#reviewForm')
+									.serialize(),
+							success : function(
+									data) {
+								var responseJson = $
+										.parseJSON(data);
+
+								if (responseJson.status == "SUCCESS") {
+
+									$(
+											'#messageBox')
+											.addClass(
+													"alert alert-success");
+									$(
+											'#messageBox')
+											.removeClass(
+													"alert-warning");
+									$(
+											'#messageBox')
+											.removeClass(
+													"alert-danger");
+									$(
+											'#messageText')
+											.html(
+													responseJson.message);
+									
+									//decrement count in pill nav
+									var opsReviewCount = $('#opsReviewCount').text() - 1;
+									$("#opsReviewCount").text(opsReviewCount);
+									
+									//increment count in pill nav
+									var opsActiveCount = +$('#opsActiveCount').text() + 1;
+									$("#opsActiveCount").text(opsActiveCount);
+
+								} else if (responseJson.status == "ERROR") {
+									$(
+											'#messageBox')
+											.addClass(
+													"alert alert-warning");
+									$(
+											'#messageBox')
+											.removeClass(
+													"alert-success");
+									$(
+											'#messageBox')
+											.removeClass(
+													"alert-danger");
+									$(
+											'#messageText')
+											.html(
+													responseJson.message);
+								} else {
+									errorInfo = "";
+									$
+											.each(
+													responseJson.errorMsgs,
+													function(
+															i,
+															item) {
+														errorInfo = errorInfo
+																+ item
+																+ "<br />";
+													});
+
+									$(
+											'#messageBox')
+											.addClass(
+													"alert alert-danger");
+									$(
+											'#messageBox')
+											.removeClass(
+													"alert-warning");
+									$(
+											'#messageBox')
+											.removeClass(
+													"alert-success");
+									$(
+											'#messageText')
+											.html(
+													errorInfo);
+								}
+
+								$('#messageBox')
+										.show();
+								$('#messageBox').fadeIn().delay(2000).fadeOut();
+								$('#wqTable').DataTable().ajax.reload();
+							}
+						});
+			}
+		      
+        </script>        

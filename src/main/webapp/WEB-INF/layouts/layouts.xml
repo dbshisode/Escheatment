@@ -4,9 +4,9 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <!-- 
 layouts.xml is the configuration file used by Apache Tiles for view composition.
-$Revision: 4513 $
+$Revision: 4520 $
 $Author: cbarrington $
-$Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
+$Date: 2018-09-06 10:48:55 -0700 (Thu, 06 Sep 2018) $
  -->
  
 <tiles-definitions>
@@ -15,7 +15,6 @@ $Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
                              <put-attribute name="title" value="" />
                              <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
                              <put-attribute name="datatables" value="/WEB-INF/views/includes/datatables.jsp" />
-                             <put-attribute name="datatablesinit" value="/WEB-INF/views/includes/wqtable-init.jsp" />
                              <put-attribute name="modal" value="/WEB-INF/views/includes/modal.jsp" />
                              <put-attribute name="nav" value="/WEB-INF/views/includes/nav-ops.jsp" />
                              <put-attribute name="bodytag" value="" />
@@ -25,7 +24,13 @@ $Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
               
               <definition name="modalDefinition" template="/WEB-INF/views/template/modal_template.jsp">                             
                              <put-attribute name="body" value="" />
-              </definition>              
+              </definition>   
+              
+              <definition name="framesDefinition" template="/WEB-INF/views/template/frames_template.jsp">                             
+                             <put-attribute name="title" value="" />                             
+                             <put-attribute name="frameLeft" value="" />
+                             <put-attribute name="frameRight" value="" />                             
+              </definition> 
               
               <definition name="index" extends="baseDefinition">
                              <put-attribute name="title" value="Escheatment Application Login" />
@@ -61,55 +66,14 @@ $Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
                              <put-attribute name="body" value="/WEB-INF/views/admin-add-body.jsp" />
               </definition>               
               
-			  <!-- <definition name="admin-add-form" extends="baseDefinition">
-                             <put-attribute name="title" value="" />
-                             <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
-                             <put-attribute name="datatables" value="" />
-                             <put-attribute name="datatablesinit" value="" />
-                             <put-attribute name="nav" value="" />
-                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/admin-body-tag.jsp" />
-                             <put-attribute name="body" value="/WEB-INF/views/admin-add-body.jsp" />
-                             <put-attribute name="footer" value="" />
-              </definition> -->   
-              
-              <definition name="admin-add-save-success" extends="baseDefinition">
-                             <put-attribute name="title" value="" />
-                             <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
-                             <put-attribute name="datatables" value="" />
-                             <put-attribute name="datatablesinit" value="" />
-                             <put-attribute name="nav" value="" />
-                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/admin-body-tag.jsp" />
-                             <put-attribute name="body" value="/WEB-INF/views/admin-add-save-success-body.jsp" />
-                             <put-attribute name="footer" value="" />
-              </definition>
-              
-			  <definition name="admin-edit-form" extends="baseDefinition">
-                             <put-attribute name="title" value="" />
-                             <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
-                             <put-attribute name="datatables" value="" />
-                             <put-attribute name="datatablesinit" value="" />
-                             <put-attribute name="nav" value="" />
-                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/admin-body-tag.jsp" />
+              <definition name="admin-edit-form" extends="modalDefinition">
                              <put-attribute name="body" value="/WEB-INF/views/admin-edit-body.jsp" />
-                             <put-attribute name="footer" value="" />
-              </definition>               
-              
-              <definition name="admin-edit-save-success" extends="baseDefinition">
-                             <put-attribute name="title" value="" />
-                             <put-attribute name="bootstrap" value="/WEB-INF/views/includes/bootstrap.jsp" />
-                             <put-attribute name="datatables" value="" />
-                             <put-attribute name="datatablesinit" value="" />
-                             <put-attribute name="nav" value="" />
-                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/admin-body-tag.jsp" />
-                             <put-attribute name="body" value="/WEB-INF/views/admin-edit-save-success-body.jsp" />
-                             <put-attribute name="footer" value="" />
-              </definition>
+              </definition>                                                      
                             
               <definition name="review-ops" extends="baseDefinition">
                              <put-attribute name="title" value="Escheatment Application - Operations Review" />
                              <put-attribute name="bodytag" value="/WEB-INF/views/includes/review-ops-body-tag.jsp" />
                              <put-attribute name="body" value="/WEB-INF/views/review-ops-body.jsp" />
-
               </definition>
               
               <definition name="active-ops" extends="baseDefinition">
@@ -120,5 +84,24 @@ $Date: 2018-08-28 14:46:18 -0700 (Tue, 28 Aug 2018) $
               
               <definition name="comments" extends="modalDefinition">
                              <put-attribute name="body" value="/WEB-INF/views/comments-body.jsp" />
-              </definition>                 
+              </definition>   
+              
+              <definition name="send-notice-unclaimed-funds" extends="baseDefinition">
+                             <put-attribute name="title" value="" />
+                             <put-attribute name="datatables" value="" />
+                             <put-attribute name="datatablesinit" value="" />
+                             <put-attribute name="modal" value="" />                          
+                             <put-attribute name="nav" value="" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/send-notice-unclaimed-funds-body.jsp" />                      
+                             <put-attribute name="footer" value="" />
+              </definition>  
+              
+              <definition name="roa" template="/WEB-INF/views/roa.jsp" />    
+              <definition name="roa-left-frame" template="/WEB-INF/views/frames/roa-left-frame.jsp" />
+              <definition name="roa-right-frame" template="/WEB-INF/views/frames/roa-right-frame.jsp" />    
+              <definition name="roa-get-data" template="/WEB-INF/views/frames/roa-get-data.jsp" />   
+              
+              <definition name="review-notice-unclaimed-funds" template="/WEB-INF/views/review-notice-unclaimed-funds.jsp" />             
+                         
 </tiles-definitions>

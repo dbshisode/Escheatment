@@ -31,8 +31,8 @@ $(document).ready( function() {
     $.fn.loadCaseDocuments = function(){
         $('#loading').remove();
         $('#content-docs').empty();
-        $('<div id="loading"><img src="css/escheatment/images/ajax-loader-indicator1.gif" /></div>').appendTo('#content-docs').show();
-        $.get('getROA', {rand: Math.random()}, function( resp ){
+        $('<div id="loading"><img src="/Escheatment/resources/css/escheatment/images/ajax-loader-indicator1.gif" /></div>').appendTo('#content-docs').show();
+        $.get('roa-get-data', {rand: Math.random()}, function( resp ){
             $('#content-docs').html( resp );
             $('#loading').remove();
 
@@ -62,7 +62,7 @@ $(document).ready( function() {
             $('.filer-link').tipsy({gravity: 'e', html:true});
             
             // set default URLs of documents to be displayed in left and right panes
-            var urlFirstDoc = "right_frame.cfm";
+            var urlFirstDoc = "roa-right-frame";
             //var urlSecondDoc = "doc_frame.cfm";
 
             // set document filter state to 'ALL' [ option 1 ]            
@@ -102,10 +102,10 @@ $(document).ready( function() {
             
             // if no docs are present (selected or otherwise), display blank docs
             //if ( typeof urlFirstDoc === "undefined" ) {
-                //urlFirstDoc = "right_frame.cfm";
+                //urlFirstDoc = "roa-right-frame";
             //}
             //if ( typeof urlSecondDoc === "undefined" ) {
-               // urlSecondDoc = "right_frame.cfm";
+               // urlSecondDoc = "roa-right-frame";
             //}
 
             // window.open( urlFirstDoc, 'elfdocframe1' );
@@ -139,7 +139,7 @@ $(document).ready( function() {
             $('.filer-link').tipsy({gravity: 'e', html:true});
             
             // set default URLs of documents to be displayed in left and right panes
-            var urlFirstDoc = "right_frame.cfm";
+            var urlFirstDoc = "roa-right-frame";
 
             // get URLs of docs to be initially displayed in the left and right panes
             urlFirstDoc =  $('a.doc-link-icon-left').eq(0).attr('href');
