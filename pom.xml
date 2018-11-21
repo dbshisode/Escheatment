@@ -98,6 +98,21 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>3.0.8</version>
 		</dependency>
+		<dependency>
+         		<groupId>com.novell.ldap</groupId>
+         		<artifactId>ldap</artifactId>
+         		<scope>system</scope>
+         		<version>1.0</version>
+         		<systemPath>${basedir}\src\main\webapp\WEB-INF\lib\ldap.jar</systemPath>
+      		</dependency>
+		<dependency>
+         		<groupId>oracle.sql</groupId>
+         		<artifactId>ojdbc6</artifactId>
+         		<scope>system</scope>
+         		<version>1.0</version>
+         		<systemPath>${basedir}\src\main\webapp\WEB-INF\lib\ojdbc6.jar</systemPath>
+      		</dependency>
+		
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>
