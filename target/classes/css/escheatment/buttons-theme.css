@@ -1,0 +1,26 @@
+/*button text element */
+.ui-button-text-only .ui-button-text { padding: 3px 6px; }
+.ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text { padding: 3px 6px; text-indent: -9999999px; }
+
+/* workarounds */
+button.ui-button:-moz-focus-inner { border: 0; padding: 0; } /* reset extra padding in Firefox */
+
+.ui-state-default { border: 1px solid #99A3B1; background:#fff url(images/button-default-bkg-new.png) 50% 50% repeat-x; color:#000; }
+/*.ui-state-hover { background: #FFD37B url(images/button-hover-bkg.png) 50% 50% repeat-x; color: #000; }
+.ui-state-hover a, .ui-state-hover a:hover { color:#000; text-decoration: none; }*/
+.ui-state-active { background: #FFD37B url(images/button-active-bkg.png) 50% 50% repeat-x; color: #000; }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #000; text-decoration: none; }
+
+#footer-toolbar-finalized {
+    float: right;
+}
+
+#footer-toolbar-filters {
+    float: left;
+}
+
+#proposedorder-actions {
+    float: right;
+}
+
+
