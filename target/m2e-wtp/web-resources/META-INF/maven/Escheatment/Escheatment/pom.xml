@@ -14,12 +14,13 @@
 	</properties>
 	<dependencies>
 		<!-- Collage dependency -->
-<!-- 		<dependency>
+ 		<dependency>
 			<groupId>org.ocsc.collage</groupId>
-			<artifactId>collage</artifactId>
-			<version>1.0.1</version>
-			<scope>provided</scope>
-		</dependency> -->
+			<artifactId>CollageSecureClient</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+    		<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/CollageSecureClient.jar</systemPath>
+		</dependency>
 		<!-- <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
