@@ -270,7 +270,7 @@
 				<version>3.2.1</version>
 				<configuration>
 					<webappDirectory>src/main/webapp</webappDirectory>
-					<outputDirectory>C:\install\apache-tomcat-9.0.10\apache-tomcat-9.0.10\webapps</outputDirectory>
+					<outputDirectory>C:\apache-tomcat-9.0.8\webapps</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
