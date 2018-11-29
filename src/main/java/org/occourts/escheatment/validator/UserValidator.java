@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.occourts.escheatment.dao.impl.EscheatmentUserDAOImpl;
 import org.occourts.escheatment.model.User;
 import org.occourts.escheatment.util.ActiveDirectory;
-import org.occourts.escheatment.util.UserConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -15,9 +14,9 @@ import org.springframework.validation.Validator;
 /**
 * UserValidator contains methods used by Spring to validate form data.  This 
 * validator is tied to the index login form
-* $Revision: 4519 $     
+* $Revision: 4565 $     
 * $Author: cbarrington $ 
-* $Date: 2018-09-04 13:38:45 -0700 (Tue, 04 Sep 2018) $    
+* $Date: 2018-11-07 15:59:56 -0800 (Wed, 07 Nov 2018) $    
 */
 
 @Component

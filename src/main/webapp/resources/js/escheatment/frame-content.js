@@ -27,6 +27,10 @@ $(document).ready( function() {
     var dualPaneColsSize    = '400,*,0';
     var singlePaneColsSize  = '400,*,0';
     var northPaneSize = 34;                 // default north pane size
+    
+    $.fn.setFrameSize = function(frame, target, size){
+        parent.document.getElementById(frame).setAttribute(target, size, 0);
+    };    
 
     $.fn.loadCaseDocuments = function(){
         $('#loading').remove();
@@ -47,8 +51,8 @@ $(document).ready( function() {
             //$.fn.paintDocIconColumns(panesState);
             // highlight first row(s) of documents that will be initially displayed
             //if ( panesState == 'single-pane') {
-                //$('tr').eq(1).addClass('highlighted');
-                //$('#doc a.doc-link-icon-left:first').addClass('doc-selected');
+                $('tr').eq(1).addClass('highlighted');
+                $('#doc a.doc-link-icon-left:first').addClass('doc-selected');
             //} else {
                 //$('#doc a.doc-link-icon-left:first').addClass('doc-selected');
                 //$('#doc a.doc-link-icon-right').eq(1).addClass('doc-selected');
@@ -76,42 +80,31 @@ $(document).ready( function() {
 
             // set state based on whether 'ALL' or 'Selected' button is pressed [ option 2 ]
             var docFilterState = $.cookie('docFilterState');
+            
             if ( docFilterState == 'show-selected-docs') {
                 $("#docsShowSelected").attr('checked', 'checked').button('refresh');
                 // show selected docs only
                 $.fn.showSelectedDocs();
                 // get URLs of selected docs to be initially displayed in the left and right panes
-                //urlFirstDoc = $('#content-docs :checkbox:checked').parent().parent().find('a.doc-link-icon-left:first').attr('href');
-                urlFirstDoc =  $('#content-docs #doc :checkbox:checked').parent().parent().find('a.doc-link-icon-left').eq(0).attr('href');
-                //urlSecondDoc = $('#content-docs #doc :checkbox:checked').parent().parent().find('a.doc-link-icon-left').eq(1).attr('href');
+                urlFirstDoc =  $('#content-docs #doc :checkbox:checked').parent().parent().find('a.doc-link-icon-left').eq(0).attr('href');                
             }
             else {
-                //$("#docsShowAll").attr('checked', 'checked').button('refresh');
                 $("#docsShowAll").attr('checked', 'checked').button('refresh');
-				//$.cookie('docFilterState','show-all-docs', {expires: 30, path: '/'});
                 $.cookie('docFilterState','show-all-docs', {expires: 30, path: '/'});
-				// show all docs
-                //$.fn.showAllDocs();
-				$.fn.showAllDocs();
+                // show all docs
+                $.fn.showAllDocs();
                 // get URLs of docs to be initially displayed in the left and right panes
-                //urlFirstDoc = $('a.doc-link-icon-left:first').attr('href');
-                urlFirstDoc =  $('#doc a.doc-link-icon-left').eq(0).attr('href');
+                //urlFirstDoc =  $('#doc a.doc-link-icon-left').eq(0).attr('href');
                 //urlSecondDoc = $('#doc a.doc-link-icon-left').eq(1).attr('href');
-            }			
-            //alert( urlFirstDoc );
+                urlFirstDoc =  $('.doc-link-icon-left:first').attr('href');
+            }
             
             // if no docs are present (selected or otherwise), display blank docs
-            //if ( typeof urlFirstDoc === "undefined" ) {
-                //urlFirstDoc = "roa-right-frame";
-            //}
-            //if ( typeof urlSecondDoc === "undefined" ) {
-               // urlSecondDoc = "roa-right-frame";
-            //}
+            if ( typeof urlFirstDoc === "undefined" ) {
+                urlFirstDoc = "roa-right-frame";
+            }
 
-            // window.open( urlFirstDoc, 'elfdocframe1' );
-            // window.open( urlSecondDoc, 'elfdocframe2' );
-            //window.open( ( urlFirstDoc  + '#toolbar=0' ), 'elfdocframe1' );
-			//window.open( ( urlSecondDoc + '#toolbar=0' ), 'elfdocframe2' );
+            window.open( ( urlFirstDoc  + '&rand=' + Math.random() + '#toolbar=0' ), 'rightframe' );            
             return false;
         });
     };
@@ -121,8 +114,8 @@ $(document).ready( function() {
 		var date2val = $("#date2").val();
         $('#loading').remove();
         $('#content-docs').empty();
-        $('<div id="loading"><img src="css/escheatment/images/ajax-loader-indicator1.gif" /></div>').appendTo('#content-docs').show();
-        $.get('roa?date1=' + date1val + '&date2=' + date2val, {rand: Math.random()}, function( resp ){
+        $('<div id="loading"><img src="/Escheatment/resources/css/escheatment/images/ajax-loader-indicator1.gif" /></div>').appendTo('#content-docs').show();
+        $.get('roa-get-data?date1=' + date1val + '&date2=' + date2val, {rand: Math.random()}, function( resp ){
             $('#content-docs').html( resp );
             $('#loading').remove();
 
@@ -355,9 +348,9 @@ $(document).ready( function() {
             $('td:Contains("' + keyword + '")','#doc').closest('tbody').show(); // look for keyword within all other table cells
             */
             $('#doc tr').hide();			
-            $('a:Contains("' + keyword + '")','#doc').closest('tr').show();         // look for keyword within document name link
-            $('td:nth-child(6):Contains("' + keyword + '")','#doc').closest('tr').show();   // look for keyword within date column
-            $('td:nth-child(7):Contains("' + keyword + '")','#doc').closest('tr').show();   // look for keyword within filer (hidden column)
+            $('td:nth-child(2):Contains("' + keyword + '")','#doc').closest('tr').show();         // look for keyword within document name link
+            $('td:nth-child(5):Contains("' + keyword + '")','#doc').closest('tr').show();   // look for keyword within date column
+            $('td:nth-child(6):Contains("' + keyword + '")','#doc').closest('tr').show();   // look for keyword within filer (hidden column)
 			$('#header').show();
             //$('td:Contains("' + keyword + '")','#doc').closest('tr').show();              // any td within table
             //$('.filer-link[title*="' + keyword + '"]','#doc').closest('tr').show();       // title field
@@ -502,7 +495,7 @@ $(document).ready( function() {
     });
 
     // document icon left
-    $('#content-docs, #content-proposedorders').on('click', 'a.doc-link-icon-left', function(event) {
+    $('#content-docs').on('click', 'a.doc-link-icon-left', function(event) {
       $('a.doc-link-icon-left').removeClass('doc-selected');
       $(this).addClass('doc-selected');
       $('tr').removeClass('highlighted');
@@ -511,23 +504,13 @@ $(document).ready( function() {
       event.preventDefault();
       event.stopPropagation();
       //window.open( this.href, 'elfdocframe1' );
-      window.open( ( this.href + '#toolbar=0' ), 'elfdocframe1' );
+      window.open( ( this.href + '#toolbar=0' ), 'rightframe' );
       return false;
     });
 
-    // document icon right
-    $('#content-proposedorders').on('click', 'a.doc-link-icon-right', function(event) {
-      $('a.doc-link-icon-right').removeClass('doc-selected');
-      $(this).addClass('doc-selected');
-      event.preventDefault();
-      event.stopPropagation();
-      //window.open( this.href, 'elfdocframe2' );
-      //window.open( ( this.href + '&rand=' + Math.random() + '#toolbar=0' ), 'elfdocframe2' );
-      return false;
-    });
 
     // document name links
-    $('#content-docs, #content-proposedorders').on('click', 'a.doc-link', function(event) {
+    $('#content-docs').on('click', 'a.doc-link', function(event) {
       //$('a.doc-link-icon-left').removeClass('doc-selected');
       $('tr').removeClass('highlighted');
       $(this).parent().parent().addClass('highlighted');
@@ -542,19 +525,19 @@ $(document).ready( function() {
     });
 
     // select document
-    $('#content-docs').on("click", "input[name$='checkboxDocPrep']", function() {
-        $.get('saveDocs.cfm', {'id': $(this).attr('id'),'state': $(this).attr('checked') , 'r': Math.random()}, function( returned ){
-            //if ( returned.indexOf("success") == -1) { // a selection has NOT been saved
-                //alert( returned );
-            //}
+    $('#content-docs').on("click", function() {
+        $.get('selectdocument.do', {'id': $(this).val(),'state': $(this).attr('checked') , 'r': Math.random()}, function( returned ){
+            if ( returned.indexOf("success") == -1) { // a selection has NOT been saved
+                alert( returned );
+            }
             // if this is a 'show selected' view, hide rows with unchecked boxes
-            //var docFilterState = $.cookie('docFilterState');
-            //if ( docFilterState == 'show-selected-docs') {
-                //$.fn.showSelectedDocs();
-            //}
-            //else if ( docFilterState === "docsShowMO" ) { // if 'show minute orders' view
-                //$.fn.showMinuteOrders();
-            //}
+            var docFilterState = $.cookie('docFilterState');
+            if ( docFilterState == 'show-selected-docs') {
+                $.fn.showSelectedDocs();
+            }
+            else if ( docFilterState === "docsShowMO" ) { // if 'show minute orders' view
+                $.fn.showMinuteOrders();
+            }
         });
     });
 	

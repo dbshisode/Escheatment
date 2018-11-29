@@ -108,7 +108,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
 								</div>
 
 								<div id="addBtn" class="pull-right row">
-									<button type="submit" name="submit" cssClass="btn btn-primary">Add</button>
+									<button type="submit" name="submit" class="btn btn-primary">Add</button>
 								</div>
 
 								<form:hidden path="active" value="Y" />

@@ -1,11 +1,13 @@
 package org.occourts.escheatment.model;
 
+import java.math.BigDecimal;
+
 /**
 * WorkQueueData contains get and set methods for the WorkQueueData object. The object is used to store
 * information for the various fields in a work queue
-* $Revision: 4520 $     
+* $Revision: 4549 $     
 * $Author: cbarrington $ 
-* $Date: 2018-09-06 10:48:55 -0700 (Thu, 06 Sep 2018) $    
+* $Date: 2018-11-02 15:03:43 -0700 (Fri, 02 Nov 2018) $    
 */
 
 public class WorkQueueData {
@@ -23,6 +25,10 @@ public class WorkQueueData {
 	    int commentCnt;
 	    String ownerName;
 	    String ownerAddress;
+	    int ownerCnt;
+	    String documentId;
+	    Long lawfulOwnerId;
+	    String underReview;
 
 	    public String getCaseTitle() {
 	        return caseTitle;
@@ -126,5 +132,38 @@ public class WorkQueueData {
 
 		public void setOwnerAddress(String ownerAddress) {
 			this.ownerAddress = ownerAddress;
-		}    
+		}
+
+		public int getOwnerCnt() {
+			return ownerCnt;
+		}
+
+		public void setOwnerCnt(int ownerCnt) {
+			this.ownerCnt = ownerCnt;
+		}
+
+		public String getDocumentId() {
+			return documentId;
+		}
+
+		public Long getLawfulOwnerId() {
+			return lawfulOwnerId;
+		}
+
+		public void setLawfulOwnerId(Long lawfulOwnerId) {
+			this.lawfulOwnerId = lawfulOwnerId;
+		}
+
+		public void setDocumentId(String documentId) {
+			this.documentId = documentId;
+		}
+
+		public String getUnderReview() {
+			return underReview;
+		}
+
+		public void setUnderReview(String underReview) {
+			this.underReview = underReview;
+		}
+
 }

@@ -1,0 +1,140 @@
+^Job GenerateOutput -qfsnameClerks_Certificate_of_Service_By_Mail_Op.qfs
+^field PAGE_NUMBER
+123
+^field TO_ADDR_MARKER_START
+^global Footer_R_NAME
+^global Footer_FIRM_NAME
+^global Footer_R_ADDR_LINE1
+^global Footer_R_ADDR_LINE2
+^global Footer_R_CITY
+^global Footer_R_STATE
+^global Footer_R_ZIP_CODE
+^field TO_ADDR_MARKER_END
+^global RECIPIENT_ADDRESS
+^field PART_NAME_ID
+20136284
+^global R_NAME
+SHEPPARD MULLIN RICHTER & HAMPTON LLP
+^global FIRM_NAME
+^global R_ADDR_LINE1
+650  TOWN CENTER DRIVE # 4TH FLOOR
+^global R_ADDR_LINE2
+^global R_CITY
+COSTA MESA
+^global R_STATE
+CA
+^global PROVINCE
+^global R_ZIP_CODE
+92626-1993
+^global COUNTRY
+US
+^field SERIALNUMBER
+1
+^field PART_NAME_ID
+20182865
+^global R_NAME
+JOSE GARAY - A PROFESSIONAL LAW CORPORATION
+^global FIRM_NAME
+^global R_ADDR_LINE1
+2030 MAIN STREET SUITE 1300
+^global R_ADDR_LINE2
+^global R_CITY
+IRVINE
+^global R_STATE
+CA
+^global PROVINCE
+^global R_ZIP_CODE
+92614
+^global COUNTRY
+US
+^field SERIALNUMBER
+2
+^field PART_NAME_ID
+20217984
+^global R_NAME
+JOSE AYALA
+^global FIRM_NAME
+^global R_ADDR_LINE1
+^global R_ADDR_LINE2
+^global R_CITY
+^global R_STATE
+^global PROVINCE
+^global R_ZIP_CODE
+^global COUNTRY
+^field SERIALNUMBER
+3
+^field PART_NAME_ID
+20217985
+^global R_NAME
+NORM'S RESTAURANTS
+^global FIRM_NAME
+^global R_ADDR_LINE1
+^global R_ADDR_LINE2
+^global R_CITY
+^global R_STATE
+^global PROVINCE
+^global R_ZIP_CODE
+^global COUNTRY
+^field SERIALNUMBER
+4
+^field PART_NAME_ID
+20236140
+^global R_NAME
+CARTER & GARAY
+^global FIRM_NAME
+^global R_ADDR_LINE1
+2030 MAIN STREET STE 1300
+^global R_ADDR_LINE2
+^global R_CITY
+IRVINE
+^global R_STATE
+CA
+^global PROVINCE
+OC
+^global R_ZIP_CODE
+92614
+^global COUNTRY
+US
+^field SERIALNUMBER
+5
+^global ALL_CHEK
+X
+^global ADDRESS
+STOLO
+^global TO_ADDRESS
+STOLO
+^global COUNTY_NAME
+Orange
+^global COURT_ADDRESS
+751  W. Santa Ana Blvd
+^global C_C_S_Z
+Santa Ana, CA 92701
+^global COURT_LOC_DESC
+Civil Complex Center
+^global CITY
+Santa Ana
+^global MAILDATE
+10/18/2018
+^global SHORT_TITLE
+JOSE AYALA VS NORM'S RESTAURANTS
+^global DISPLAY_CASE_NUM
+05CC00012
+^global PRINT_OPTION
+NPR
+^global SYSTEM_DATE
+10/17/2018
+^global LOCATION
+1600 Pennsylvania Ave. Washington DC 10204
+^global CLERK_CERT_INFO
+stolo
+^global OUTPUT_FORM_NAME
+Notice of Unclaimed Funds
+^field CLERK_SIGNATURE
+^field SYSDATE_1
+10/17/2018
+^field MAILING_LOCATION
+1600 Pennsylvania Ave. Washington DC 10204
+^field SYSDATE_2
+10/18/2018
+^field copy_text 
+ ORIGINAL 

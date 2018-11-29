@@ -4,9 +4,9 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <!-- 
 layouts.xml is the configuration file used by Apache Tiles for view composition.
-$Revision: 4520 $
+$Revision: 4565 $
 $Author: cbarrington $
-$Date: 2018-09-06 10:48:55 -0700 (Thu, 06 Sep 2018) $
+$Date: 2018-11-07 15:59:56 -0800 (Wed, 07 Nov 2018) $
  -->
  
 <tiles-definitions>
@@ -74,7 +74,7 @@ $Date: 2018-09-06 10:48:55 -0700 (Thu, 06 Sep 2018) $
                              <put-attribute name="title" value="Escheatment Application - Operations Review" />
                              <put-attribute name="bodytag" value="/WEB-INF/views/includes/review-ops-body-tag.jsp" />
                              <put-attribute name="body" value="/WEB-INF/views/review-ops-body.jsp" />
-              </definition>
+              </definition>             
               
               <definition name="active-ops" extends="baseDefinition">
                              <put-attribute name="title" value="Escheatment Application - Marked as Active" />
@@ -82,26 +82,74 @@ $Date: 2018-09-06 10:48:55 -0700 (Thu, 06 Sep 2018) $
                              <put-attribute name="body" value="/WEB-INF/views/active-ops-body.jsp" />
               </definition>    
               
+              <definition name="notice-sent-ops" extends="baseDefinition">
+                             <put-attribute name="title" value="Escheatment Application - Notice of Unclaimed Funds Sent" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/notice-sent-ops-body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/notice-sent-ops-body.jsp" />
+              </definition>                
+              
               <definition name="comments" extends="modalDefinition">
                              <put-attribute name="body" value="/WEB-INF/views/comments-body.jsp" />
               </definition>   
-              
-              <definition name="send-notice-unclaimed-funds" extends="baseDefinition">
-                             <put-attribute name="title" value="" />
-                             <put-attribute name="datatables" value="" />
-                             <put-attribute name="datatablesinit" value="" />
-                             <put-attribute name="modal" value="" />                          
-                             <put-attribute name="nav" value="" />
-                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/body-tag.jsp" />
-                             <put-attribute name="body" value="/WEB-INF/views/send-notice-unclaimed-funds-body.jsp" />                      
-                             <put-attribute name="footer" value="" />
-              </definition>  
               
               <definition name="roa" template="/WEB-INF/views/roa.jsp" />    
               <definition name="roa-left-frame" template="/WEB-INF/views/frames/roa-left-frame.jsp" />
               <definition name="roa-right-frame" template="/WEB-INF/views/frames/roa-right-frame.jsp" />    
               <definition name="roa-get-data" template="/WEB-INF/views/frames/roa-get-data.jsp" />   
               
-              <definition name="review-notice-unclaimed-funds" template="/WEB-INF/views/review-notice-unclaimed-funds.jsp" />             
+              <definition name="input-notice-unclaimed-funds" extends="baseDefinition">
+                             <put-attribute name="title" value="" />
+                             <put-attribute name="datatables" value="" />
+                             <put-attribute name="datatablesinit" value="" />
+                             <put-attribute name="modal" value="" />                          
+                             <put-attribute name="nav" value="" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/input-notice-unclaimed-funds-body.jsp" />                      
+                             <put-attribute name="footer" value="" />
+              </definition>  
+                            
+              <definition name="review-notice-unclaimed-funds" template="/WEB-INF/views/review-notice-unclaimed-funds.jsp" />    
+              
+              <definition name="review-acct" extends="baseDefinition">
+                   <put-attribute name="title" value="Escheatment Application - Accounting Review" />
+                   <put-attribute name="nav" value="/WEB-INF/views/includes/nav-acct.jsp" />
+                   <put-attribute name="bodytag" value="/WEB-INF/views/includes/review-acct-body-tag.jsp" />                   
+                   <put-attribute name="body" value="/WEB-INF/views/review-acct-body.jsp" />
+              </definition>  
+                            
+              <definition name="acct-add-to-list-form" extends="modalDefinition">
+                             <put-attribute name="body" value="/WEB-INF/views/acct-add-to-list-body.jsp" />
+              </definition>                
+
+              <definition name="acct-add-to-list-trust-form" extends="modalDefinition">
+                             <put-attribute name="body" value="/WEB-INF/views/acct-add-to-list-trust-body.jsp" />
+              </definition>       
+              
+              <definition name="input-request-addl-info" extends="baseDefinition">
+                             <put-attribute name="title" value="" />
+                             <put-attribute name="datatables" value="" />
+                             <put-attribute name="datatablesinit" value="" />
+                             <put-attribute name="modal" value="" />                          
+                             <put-attribute name="nav" value="" />
+                             <put-attribute name="bodytag" value="/WEB-INF/views/includes/body-tag.jsp" />
+                             <put-attribute name="body" value="/WEB-INF/views/input-request-addl-info-body.jsp" />                      
+                             <put-attribute name="footer" value="" />
+              </definition>    
+              
+              <definition name="acct-pending" extends="baseDefinition">
+                   <put-attribute name="title" value="Escheatment Application - Accounting Ready for Publication" />
+                   <put-attribute name="nav" value="/WEB-INF/views/includes/nav-acct.jsp" />
+                   <put-attribute name="bodytag" value="/WEB-INF/views/includes/acct-pending-body-tag.jsp" />                   
+                   <put-attribute name="body" value="/WEB-INF/views/acct-pending-body.jsp" />
+              </definition> 
+              
+              <definition name="acct-under-review" extends="baseDefinition">
+                   <put-attribute name="title" value="Escheatment Application - Accounting Claims Under Review" />
+                   <put-attribute name="nav" value="/WEB-INF/views/includes/nav-acct.jsp" />
+                   <put-attribute name="bodytag" value="/WEB-INF/views/includes/acct-under-review-body-tag.jsp" />                   
+                   <put-attribute name="body" value="/WEB-INF/views/acct-under-review-body.jsp" />
+              </definition> 
+              
+              <definition name="review-request-addl-info" template="/WEB-INF/views/review-request-addl-info.jsp" />
                          
 </tiles-definitions>

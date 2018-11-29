@@ -116,7 +116,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
     			"deferRender": true,
             	"order": [[ 2, "asc" ]], //last name
             	"columns": [
-           			{"orderable": false, data: 'userId', render: function (data,type,row,meta) {return '<a href="admin-edit?userId=' + data + '" id="admin-edit" rel="modal:open"><button type="button" class="btn-default">Edit</button></a>' }}, //button
+           			{"orderable": false, data: 'userId', render: function (data,type,row,meta) {return '<a href="admin-edit?userId=' + data + '" id="admin-edit" rel="modal:open"><button type="button" class="btn btn-default">Edit</button></a>' }}, //button
            			{"orderable": true, data: 'userName' },
            			{"orderable": true, data: 'lastName' },
            			{"orderable": true, data: 'firstName' },

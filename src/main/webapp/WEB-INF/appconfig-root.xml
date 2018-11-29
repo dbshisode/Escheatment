@@ -1,21 +1,24 @@
 <!-- 
 appconfig-root.xml is the configuration file used by Spring for MVC, datasource, etc.
-$Revision: 4519 $
-$Author: cbarrington $
-$Date: 2018-09-04 13:38:45 -0700 (Tue, 04 Sep 2018) $
+$Revision: 4673 $
+$Author: flabriaga $
+$Date: 2018-11-19 13:21:18 -0800 (Mon, 19 Nov 2018) $
  -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int-mail="http://www.springframework.org/schema/integration/mail"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/integration/mail 
+		http://www.springframework.org/schema/integration/mail/spring-integration-mail.xsd">
 
 	<!-- <mvc:resources mapping="/assets/**" location="/assets/" /> <mvc:resources 
 		mapping="/css/**" location="/css/" /> <mvc:resources mapping="/js/**" location="/js/" 
@@ -27,7 +30,13 @@ $Date: 2018-09-04 13:38:45 -0700 (Tue, 04 Sep 2018) $
 
 	<context:component-scan
 		base-package="org.occourts" />
-
+	
+	<!--  Needed to load properties -->
+	<context:property-placeholder location="classpath:escheatment.properties" />
+	
+	<context:annotation-config/>
+	<bean class="org.occourts.escheatment.AppConfig"/>
+	
 	<!-- /WEB-INF/views/ folder holds views/jsp files -->
 	<!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
 		<property name="prefix"> <value>/WEB-INF/views/</value> </property> <property 
@@ -68,15 +77,24 @@ $Date: 2018-09-04 13:38:45 -0700 (Tue, 04 Sep 2018) $
 	</bean>	
 
 	<!-- This is Datasource setting -->
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName"
-			value="oracle.jdbc.OracleDriver" />
-		<property name="url"
-			value="jdbc:oracle:thin:@v3dbdev1:1521:V3TRAIN" />
-		<property name="username" value="escheatment_user" />
-		<property name="password" value="E$ch@tm3n7" />
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		
+		<property name="driverClassName" value="${datasource.escheatment.className}" />
+		<property name="url" value="${datasource.escheatment.url}" />
+		<property name="username" value="${datasource.escheatment.userName}" />
+		<property name="password" value="${datasource.escheatment.password}" />
 	</bean>
+	
+	<bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+	<bean id="oracleJdbc4NativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.OracleJdbc4NativeJdbcExtractor" lazy-init="true" />
+		
+	<!-- <bean id="dataSourceV3"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${datasource.v3.className}" />
+		<property name="url" value="${datasource.v3.url}" />
+		<property name="username" value="${datasource.v3.userName}" />
+		<property name="password" value="${datasource.v3.password}" />
+	</bean> -->
 
 	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
 		<property name="jndiName" value="java:comp/env/jdbc/EscheatmentDS"/> </bean> -->
@@ -99,5 +117,69 @@ $Date: 2018-09-04 13:38:45 -0700 (Tue, 04 Sep 2018) $
 	<bean id="workqueuedatabo"
 		class="org.occourts.escheatment.bo.WorkQueueDataBO">
 	</bean>
+	
+	<bean id="lawfulownerdao"
+		class="org.occourts.escheatment.dao.impl.LawfulOwnerDAOImpl">
+	</bean>	
+	
+	<bean id="pdf"
+		class="org.occourts.escheatment.util.PdfUtil">
+	</bean>		
+	
+	<bean id="formdatadao"
+		class="org.occourts.escheatment.dao.impl.FormDataDAOImpl">
+	</bean>			
 
+	<bean id="roadatadao"
+		class="org.occourts.escheatment.dao.impl.RoaDataDAOImpl">
+	</bean>	
+	
+	<bean id="commentsdao"
+		class="org.occourts.escheatment.dao.impl.CommentsDAOImpl">
+	</bean>		
+
+	<bean id="documentdao"
+		class="org.occourts.escheatment.dao.impl.DocumentDAOImpl">
+	</bean>		
+	
+	<bean id="casehistory"
+		class="org.occourts.escheatment.util.CaseHistoryService">
+	</bean>		
+		
+	<!-- eService beans -->
+	<bean id="axiomMessageFactory" class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory" />
+	<bean id="eserviceMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="contextPath" value="org.occourts.ws.eservice" />
+		<property name="mtomEnabled" value="true" />
+	</bean>
+
+	<bean id="eserviceWebServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="axiomMessageFactory" />
+		<property name="marshaller" ref="eserviceMarshaller"></property>
+		<property name="unmarshaller" ref="eserviceMarshaller"></property>
+		<property name="messageSender">
+			<bean
+				class="org.springframework.ws.transport.http.HttpComponentsMessageSender">
+				<property name="connectionTimeout" value="5000" />
+				<property name="readTimeout" value="5000" />
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${smtp.host}" />
+		<property name="port" value="${smtp.port}" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">false</prop>
+			   <prop key="mail.smtp.starttls.enable">false</prop>
+    		</props>
+		</property>
+		<!-- 
+		<property name="username" value="${smtp.user}" />
+		<property name="password" value="${smtp.password}" />
+		 -->
+	</bean>
 </beans>

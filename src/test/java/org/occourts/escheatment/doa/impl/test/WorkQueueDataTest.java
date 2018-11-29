@@ -11,7 +11,7 @@ public class WorkQueueDataTest {
 
 	private WorkQueueDataDAOImpl workqueuedoa = null;
 		
-		@Before
+		/*@Before
 		public void setup() {
 			workqueuedoa = new WorkQueueDataDAOImpl();
 		}
@@ -20,5 +20,5 @@ public class WorkQueueDataTest {
 		public void MarkAsActive_should_return_null() {
 			String result = workqueuedoa.MarkAsActive();
 			assertNull(result);
-		}
+		}*/
 }

@@ -7,6 +7,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
         <wb-resource deploy-path="/WEB-INF/resources" source-path="/src/main/webapp/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/xjc"/>
         <property name="context-root" value="Escheatment"/>
         <property name="java-output-path" value="/Escheatment/target/classes"/>
     </wb-module>

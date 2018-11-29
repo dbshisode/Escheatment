@@ -5,9 +5,9 @@
 
 <%--
 login-body.jsp is the body of the index view.  It contains a form to allow users to provide user name and password.
-$Revision: 4512 $
+$Revision: 4531 $
 $Author: cbarrington $
-$Date: 2018-08-24 15:52:51 -0700 (Fri, 24 Aug 2018) $
+$Date: 2018-10-10 08:52:47 -0700 (Wed, 10 Oct 2018) $
  --%>
 
 <div class="col-lg-6 col-lg-offset-3">
@@ -19,7 +19,7 @@ $Date: 2018-08-24 15:52:51 -0700 (Fri, 24 Aug 2018) $
                             <fieldset>
                                 <legend>Escheatment Application Login</legend>
 
-                                <form:input id="userName"  path="userName" label="User Name" cssClass="col-lg-10" placeholder="User Name" />                                
+                                <form:input id="userName" path="userName" label="User Name" cssClass="col-lg-10" placeholder="User Name" />                                
 								
 								<br /><br />
 								

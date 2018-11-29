@@ -19,9 +19,9 @@ import com.novell.ldap.LDAPSearchResults;
 /**
 * LdapAuthenticator contains methods necessary to connect to a domain controller using LDAP 
 * for user authentication (validation of user password stored in AD)
-* $Revision: 4500 $     
+* $Revision: 4529 $     
 * $Author: cbarrington $ 
-* $Date: 2018-08-14 15:57:31 -0700 (Tue, 14 Aug 2018) $    
+* $Date: 2018-10-05 11:12:33 -0700 (Fri, 05 Oct 2018) $    
 */
 
 public class LdapAuthenticator extends EscheatmentObject {
@@ -261,6 +261,6 @@ public class LdapAuthenticator extends EscheatmentObject {
 	protected boolean secure;
 	protected String uid;
 	protected String searchRoot;
-	static final ResourceBundle authProperties = ResourceBundle.getBundle("auth");
+	static final ResourceBundle authProperties = ResourceBundle.getBundle("escheatment");
 
 }

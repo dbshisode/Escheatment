@@ -19,13 +19,14 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.occourts.escheatment.Constants;
 import org.occourts.escheatment.model.User;
 
 /**
 * EscheatmentObject contains utility methods used in various areas of the application.
-* $Revision: 4511 $     
+* $Revision: 4668 $     
 * $Author: cbarrington $ 
-* $Date: 2018-08-24 08:26:17 -0700 (Fri, 24 Aug 2018) $    
+* $Date: 2018-11-15 11:09:49 -0800 (Thu, 15 Nov 2018) $    
 */
 
 abstract public class EscheatmentObject implements Serializable {
@@ -552,7 +553,12 @@ abstract public class EscheatmentObject implements Serializable {
 	static public boolean isAdmin(User loggedinUser) {
 		return loggedinUser!=null && 
 				loggedinUser.getUserRoleAdmin()!=null && 
-				loggedinUser.getUserRoleAdmin().intValue() >= UserConstants.FUNC_ADMIN_ROLE;
+				loggedinUser.getUserRoleAdmin().intValue() >= Constants.FUNC_ADMIN_ROLE;
 	}	
+	
+	static public String getBaseFilePath() {
+		String path = SpringBeanUtil.getInstance().getProperty(Constants.PDF_OUTPUT_PATH);
+		return path;
+	}
 	
 }

@@ -49,19 +49,17 @@ body {
 input[type="text"], input[type="password"] {
 	height: 40px;
 }
-
-.dataTableBody {
-	padding-top: 50px;
-	padding-bottom: 20px;
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
 }
 
-.top-buffer { margin-top:20px; }
-.dark-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0; 
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
 }
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
 }

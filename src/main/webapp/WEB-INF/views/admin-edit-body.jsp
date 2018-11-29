@@ -90,7 +90,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
 								<div class="form-check row">
 									<form:radiobutton path="userFunctionalArea"
 										value="${opsRoleValue}" class="form-check-input"
-										checked="${user.userFunctionalArea == UserConstants.OPS_ROLE ? 'checked' : ''}" />
+										checked="${user.userFunctionalArea == AppConstants.OPS_ROLE ? 'checked' : ''}" />
 									<label for="userFunctionalArea" class="col-lg-4 col-form-label">
 										Operations </label>
 								</div>
@@ -98,7 +98,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
 								<div class="form-check row">
 									<form:radiobutton path="userFunctionalArea"
 										value="${acctRoleValue}" class="form-check-input"
-										checked="${user.userFunctionalArea == UserConstants.ACCT_ROLE ? 'checked' : ''}" />
+										checked="${user.userFunctionalArea == AppConstants.ACCT_ROLE ? 'checked' : ''}" />
 									<label for="userFunctionalArea" class="col-lg-4 col-form-label">
 										Accounting </label>
 								</div>
@@ -106,7 +106,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
 								<div class="form-check row">
 									<form:checkbox path="userRoleAdmin" class="form-check-input"
 										value="${funcAdminRoleValue}" id="adminCheckbox"
-										checked="${user.userFunctionalArea == UserConstants.FUNC_ADMIN_ROLE ? 'checked' : ''}" />
+										checked="${user.userFunctionalArea == AppConstants.FUNC_ADMIN_ROLE ? 'checked' : ''}" />
 									<label for="adminCheckbox" class="col-lg-4 col-form-label">
 										Admin </label>
 								</div>
@@ -120,7 +120,7 @@ $Date: 2018-08-15 07:37:36 -0700 (Wed, 15 Aug 2018) $
 								</div>
 
 								<div class="pull-right">
-									<button type="submit" name="submit" cssClass="btn btn-primary">Save</button>
+									<button type="submit" name="submit" class="btn btn-primary">Save</button>
 								</div>
 
 								<form:hidden path="userId" value="${userId}" />

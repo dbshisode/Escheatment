@@ -4,11 +4,11 @@
 
 <%--
 review-ops-body.jsp is the body of the review-ops view.  It contains a table of items for this work queue.
-$Revision: 4523 $
+$Revision: 4566 $
 $Author: cbarrington $
-$Date: 2018-09-14 09:26:52 -0700 (Fri, 14 Sep 2018) $
- --%>
-    
+$Date: 2018-11-08 09:28:54 -0800 (Thu, 08 Nov 2018) $
+ --%>   
+
         <div id="wrap">
             <div id="main" class="container pull-left">
                 <!-- Example row of columns -->
@@ -33,11 +33,11 @@ $Date: 2018-09-14 09:26:52 -0700 (Fri, 14 Sep 2018) $
                                     <tr> 
                                         <!--<th width="3%">#</th>--> 
                                         <th width="10%">Case Number</th> 
-                                        <th width="15%">Case Title</th> 
-                                        <th width="10%">Trust Type</th> 
-                                        <th width="5%">Trust Number</th>  
-                                        <th width="5%">Lawful Owner Name</th>
-                                        <th width="5%">Lawful Owner Address</th>                                                                       
+                                        <th width="13%">Case Title</th> 
+                                        <th width="9%">Trust Type</th> 
+                                        <th width="4%">Trust Number</th>  
+                                        <th width="11%">Lawful Owner(s)</th>
+                                        <th width="3%">&nbsp;</th>                                                                       
                                         <th width="6%">Deposit Date</th>
                                         <th width="7%">Orig. Amt.</th>
                                         <th width="7%">Balance</th>
@@ -78,7 +78,7 @@ $Date: 2018-09-14 09:26:52 -0700 (Fri, 14 Sep 2018) $
                             </div>
                         </div>  
                         <div id="btnContainer" class="pull-right">
-                            <button type="button" class="btn-default">Export to Excel</button>
+                            <button type="button" class="btn-default">Export to Excel</button>                           
                         </div>
                     </div>
                 </div>   
@@ -89,8 +89,8 @@ $Date: 2018-09-14 09:26:52 -0700 (Fri, 14 Sep 2018) $
         
         <script type="text/javascript">
         $(document).ready(function() {
-        	$('#wqTable').DataTable( {
-				"ajax": {"url":"get-ops-table","dataSrc":""},
+        	var table = $('#wqTable').DataTable( {
+				"ajax": {"url":"get-ops-review-table","dataSrc":""},
 				"deferRender": true,            	
 	        	"order": [[ 3, "desc" ]], //trust number
 	        	"columns": [
@@ -99,26 +99,71 @@ $Date: 2018-09-14 09:26:52 -0700 (Fri, 14 Sep 2018) $
 	       			{"orderable": true, data: 'caseTitle'},
 	       			{"orderable": true, data: 'trustType'},
 	       			{"orderable": true, data: 'trustNum'},
-	       			{"orderable": true, data: 'ownerName'},
-	       			{"orderable": true, data: 'ownerAddress'},
+	       			{"orderable": true, data: 'ownerName', render: function (data,type,row,meta) {return '<div class="nameAddress">' + data + row.ownerAddress + '</div><div class="addlNames"></div><div class="trustId">' + row.trustId + '</div>'} },	       			
+	       			{"orderable": false, data: 'ownerAddress', render: function (data,type,row,meta) {return row.ownerCnt > 1 ? '<span class="showAddlNames glyphicon glyphicon-plus-sign"></span>' : '&nbsp;' } },
 	       			{"orderable": true, data: 'depositDate'},
 	       			{"orderable": true, data: 'origAmt', render: $.fn.dataTable.render.number( ',', '.', 2, '$' )},
 	       			{"orderable": true, data: 'balance', render: $.fn.dataTable.render.number( ',', '.', 2, '$' )},
-	       			{"orderable": true, data: 'comments', render: function (data,type,row,meta) {return data != '' ? '<span style="font-size:12px;">' + data + '<a href="comments" rel="modal:open">View All</a> | <a href="comments" rel="modal:open">Add Comment</a></span>' : '<span style="font-size:12px;"><a href="comments" rel="modal:open">Add Comment</a></span>' }},
-	       			{"orderable": false, data: 'trustId', render: function (data,type,row,meta) {return '<a href="#" onclick="markActive(' + data + ');" id="mark-active"><button type="button" class="btn-default">Mark as Active</button></a>' } }, //button
-	       			{"orderable": false, data: 'trustId', render: function (data,type,row,meta) {return '<a href="#" onclick="sendNotice(' + data + ');"><button type="button" class="btn-default">Send Notice</button></a>' } } //button
+	       			{"orderable": true, data: 'comments', render: function (data,type,row,meta) {return data != '' ? '<span style="font-size:12px;">' + data + '<a href="comments?trustId=' + row.trustId + '&viewAll=true" rel="modal:open">View All</a> | <a href="comments?trustId=' + row.trustId + '&viewAll=false" rel="modal:open">Add Comment</a></span>' : '<span style="font-size:12px;"><a href="comments?trustId=' + row.trustId + '&viewAll=false" rel="modal:open">Add Comment</a></span>' }},
+	       			{"orderable": false, data: 'trustId', render: function (data,type,row,meta) {return '<a href="#" onclick="markActive(' + data + ');" id="mark-active"><button type="button" class="btn btn-default">Mark as Active</button></a>' } }, //button
+	       			{"orderable": false, data: 'trustId', render: function (data,type,row,meta) {return '<a href="#" onclick="sendNotice(' + data + ');"><button type="button" class="btn btn-default">Send Notice</button></a>' } } //button
 	       			]            		
-	        });         
+	        });  
+        	
+            //reload datatable when modal is closed, to show revised data
+            $(function() {
+    	        $(document).on($.modal.AFTER_CLOSE, refreshPage);
+    	        function refreshPage(event, modal) {    	        	
+    	        	table.ajax.reload();
+    	        }
+            });             
+                                    
         });
         
+        $('#wqTable').on('click', '.showAddlNames', function(e){
+	            e.preventDefault();	      
+	            //$('.addlNames').hide();	            
+	            var trustId = $(this).closest('td').prev().find(".trustId").html();
+	            var addlNamesTd = $(this).closest('td').prev().find(".addlNames");
+				var addlNames = '';
+				
+				
+				$.ajax({
+					  dataType: "json",
+					  url: "get-addl-names?trustId=" + trustId,
+					  data: trustId,
+					  success: function (data) {
+		            	  $.each( data, function( key, val ) {
+		            		  addlNames += '<div class="addlNamesRow">' + val.nameLine1 + '<br />';
+		            		  
+		            		  if (val.nameLine2 != '') {
+		            			  addlNames += val.nameLine2 + '<br />';
+		            		  }
+		            		  addlNames += val.addressLine1 + '<br />';
+		            		  
+		            		  if (val.addressLine2 != '') {
+		            			  addlNames += val.addressLine2 + '<br />';
+		            		  }
+		            		  addlNames += val.addressLine3 + '</div>';		            		  
+		            	  });
+		            			            	
+		            	addlNamesTd.html(addlNames);	
+		            	//addlNamesTd.fadeToggle();		            	
+		            	//showAddlNames glyphicon glyphicon-triangle-bottom		            	
+					  }
+					});
+				$(this).closest('td').prev().find(".addlNames").fadeToggle();
+				$(this).toggleClass("glyphicon-plus-sign glyphicon-minus-sign");            
+        	});        
+
         function openROA(caseNum) {
         	window.open('roa?caseNum=' + caseNum,
         			    'getNote', 
         			    'toolbar=0,location=0,menubar=0,resizable=1,scrollbars=1');
         }
         
-        function sendNotice(trustNum) {
-        	window.open('send-notice-unclaimed-funds?trustNum=' + trustNum,
+        function sendNotice(trustId) {
+        	window.open('input-notice-unclaimed-funds?trustId=' + trustId,
         			    'sendNotice', 
         			    'left=50,top=50,width=800,height=785,toolbar=0,location=0,menubar=0,resizable=1,scrollbars=1');
         }     
@@ -218,6 +263,6 @@ $Date: 2018-09-14 09:26:52 -0700 (Fri, 14 Sep 2018) $
 								$('#wqTable').DataTable().ajax.reload();
 							}
 						});
-			}
-		      
+			}		    
+            
         </script>        

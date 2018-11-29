@@ -1,3 +1,5 @@
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -48,7 +50,7 @@
 	 var childWin = new Array();
 	 var winCount = 0;
 	function openPopup(path,docId,dmsId) {
-	 childWin[winCount] = window.open('/Escheatment/' + path + '?F_DocNumber=' + docId + '&dms=' + dmsId + '&ErrorPage=eService/DocPreview', winCount, 'toolbar=0,location=0,menubar=0,resizable=1,scrollbars=1');
+	 childWin[winCount] = window.open('/Escheatment/' + path + '?doc_id=' + docId + '&dms=' + dmsId, winCount, 'toolbar=0,location=0,menubar=0,resizable=1,scrollbars=1');
 	 winCount++;
 	 return false;
 	 }
@@ -68,8 +70,7 @@
     <div class="ui-layout-north">
         <!-- top toolbar -->
         <div id="toolbar-top">
-			<a id="toolbar-button-close" class="toolbar-button-close" onclick="javascript:window.parent.close();">close</a>
-			<!--<a id="toolbar-button-merge" class="toolbar-button-print link-tooltip" title="Merge Documents" href="getAllCaseDocs.cfm?caseId=#session.case_id#" target="_blank">&nbsp;</a>-->
+			<a id="toolbar-button-close" class="toolbar-button-close" onclick="javascript:window.parent.close();">close</a>			
             <span><input type="text" name="keyword" id="keyword" size="25" maxlength="20" title="Enter Search Term" class="link-tooltip" /></span>
         </div>
     </div>
@@ -77,7 +78,7 @@
     <div class="ui-layout-center">
 
 		<div class="header">
-			<span class="notes" title="Case Title">05CC00012</span>			
+			<span class="notes" title="Case Title">${caseNum}</span>			
 		</div>
 		
 		<div class="date-filter">
@@ -94,8 +95,8 @@
 
         
         <!-- content -->		
-        <div class="ui-layout-content">
-            <div id="content-docs"></div>
+        <div class="ui-layout-content">        	
+            <div id="content-docs"></div>            
         </div>		
 
         <!-- footer -->
