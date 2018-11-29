@@ -14,12 +14,12 @@
 	</properties>
 	<dependencies>
 		<!-- Collage dependency -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.ocsc.collage</groupId>
 			<artifactId>collage</artifactId>
 			<version>1.0.1</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		<!-- <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -178,11 +178,11 @@
 			<artifactId>axiom-impl</artifactId>
 			<version>1.2.15</version>
 		</dependency>
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.apache.ws.commons.axiom</groupId>
 			<artifactId>axiom-impl</artifactId>
 			<version>1.2.15</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
